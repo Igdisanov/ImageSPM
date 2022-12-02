@@ -9,7 +9,5 @@ import UIKit
 
 public class TabBarController: UITabBarController {
     
-    override public func viewDidLoad() {
-    
-    }
+  
 }
