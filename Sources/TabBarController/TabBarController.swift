@@ -7,6 +7,7 @@
 
 import UIKit
 import AllImageViewController
+import LikeImageViewController
 
 public class TabBarController: UITabBarController {
     
@@ -15,7 +16,9 @@ public class TabBarController: UITabBarController {
         let allImageVC = setupVC(view: AllImageViewController(),
                                  title: "All",
                                  image: "square.grid.3x3")
-        viewControllers = [allImageVC]
+        
+        let likeImageVC = setupVC(view: LikeImageViewController(), title: "Like", image: "")
+        viewControllers = [allImageVC, likeImageVC]
         
     }
     
