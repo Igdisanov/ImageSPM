@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "ImageSPM",
-            targets: ["TabBarController", "AllImageViewController", "LikeImageViewController"]),
+            targets: ["TabBarController", "AllImageViewController", "LikeImageViewController", "DetailInfo"]),
     ],
     dependencies: [
     ],
@@ -22,6 +22,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "LikeImageViewController",
+            dependencies: []),
+        .target(
+            name: "DetailInfo",
             dependencies: [])
     ]
 )
