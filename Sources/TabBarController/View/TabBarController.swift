@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import AllImageViewController
-import LikeImageViewController
+import AllImage
+import LikeImage
 
 public class TabBarController: UITabBarController {
     
