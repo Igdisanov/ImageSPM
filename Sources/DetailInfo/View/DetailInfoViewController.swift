@@ -18,7 +18,7 @@ public class DetailInfoViewController: UIViewController {
     
 }
 
-//MARK: AllImageViewInput
+//MARK: DetailInfoViewInput
 
 extension DetailInfoViewController: DetailInfoViewInput {
     

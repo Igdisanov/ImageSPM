@@ -11,7 +11,7 @@ class LikeImageInteractor {
     
 }
 
-     //MARK: AllImageInteractorInput
+     //MARK: LikeImageInteractorInput
 
 extension LikeImageInteractor: LikeImageInteractorInput {
     

@@ -14,14 +14,14 @@ class DetailInfoPresenter: DetailInfoInteractorOutput {
     
 }
 
-     //MARK:AllImageViewOutput
+     //MARK:DetailInfoViewOutput
 
 extension DetailInfoPresenter: DetailInfoViewOutput {
     func viewDidLoad() {
     }
 }
 
-     //MARK: AllImageModuleInput
+     //MARK: DetailInfoModuleInput
 
 extension DetailInfoPresenter: DetailInfoModuleInput {
     

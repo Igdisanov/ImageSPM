@@ -11,6 +11,8 @@ import LikeImage
 
 public class TabBarController: UITabBarController {
     
+    var output: TabBarViewOutput!
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         let allImageVC = setupVC(view: AllImageConfigurator.configure(output: nil),
@@ -29,5 +31,14 @@ public class TabBarController: UITabBarController {
         vc.tabBarItem.title = title
         vc.tabBarItem.image = UIImage(named: image)
         return vc
+    }
+}
+
+//MARK: TabBarViewInput
+
+extension TabBarController: TabBarViewInput {
+    
+    func setupInitialState() {
+        
     }
 }

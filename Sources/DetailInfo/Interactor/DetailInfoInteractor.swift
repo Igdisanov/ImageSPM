@@ -11,7 +11,7 @@ class DetailInfoInteractor {
     
 }
 
-     //MARK: AllImageInteractorInput
+     //MARK: DetailInfoInteractorInput
 
 extension DetailInfoInteractor: DetailInfoInteractorInput {
     

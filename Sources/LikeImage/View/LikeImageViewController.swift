@@ -18,7 +18,7 @@ public class LikeImageViewController: UIViewController {
     
 }
 
-     //MARK: AllImageViewInput
+     //MARK: LikeImageViewInput
 
 extension LikeImageViewController: LikeImageViewInput {
     
