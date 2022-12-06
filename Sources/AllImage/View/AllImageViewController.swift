@@ -9,9 +9,20 @@ import UIKit
 
 public class AllImageViewController: UIViewController {
     
+    var output: AllImageViewOutput!
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
     }
     
+}
+
+     //MARK: AllImageViewInput
+
+extension AllImageViewController: AllImageViewInput {
+    
+    func setupInitialState() {
+        
+    }
 }

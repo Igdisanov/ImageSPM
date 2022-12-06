@@ -13,7 +13,7 @@ public class TabBarController: UITabBarController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let allImageVC = setupVC(view: AllImageViewController(),
+        let allImageVC = setupVC(view: AllImageConfigurator.configure(output: nil),
                                  title: "All",
                                  image: "square.grid.3x3")
         
