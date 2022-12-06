@@ -7,11 +7,22 @@
 
 import UIKit
 
-public class AllImageViewController: UIViewController {
+public class DetailInfoViewController: UIViewController {
+    
+    var output: DetailInfoViewOutput!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .green
     }
     
+}
+
+//MARK: AllImageViewInput
+
+extension DetailInfoViewController: DetailInfoViewInput {
+
+func setupInitialState() {
+   
+}
 }
