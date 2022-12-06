@@ -5,12 +5,15 @@ import PackageDescription
 
 let package = Package(
     name: "ImageSPM",
+    platforms: [
+        .iOS(.v12)
+    ],
     products: [
         .library(
             name: "ImageSPM",
             targets: ["TabBarController", "AllImage", "LikeImage", "DetailInfo"]),
     ],
-    dependencies: [
+    dependencies: [.package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.4.1"))
     ],
     targets: [
         
@@ -25,6 +28,6 @@ let package = Package(
             dependencies: []),
         .target(
             name: "DetailInfo",
-            dependencies: [])
+            dependencies: ["Kingfisher"])
     ]
 )
