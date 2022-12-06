@@ -5,4 +5,14 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
-import Foundation
+class LikeImageInteractor {
+    
+    weak var output: LikeImageInteractorOutput!
+    
+}
+
+     //MARK: AllImageInteractorInput
+
+extension LikeImageInteractor: LikeImageInteractorInput {
+    
+}

@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
@@ -21,8 +21,8 @@ public class DetailInfoViewController: UIViewController {
 //MARK: AllImageViewInput
 
 extension DetailInfoViewController: DetailInfoViewInput {
-
-func setupInitialState() {
-   
-}
+    
+    func setupInitialState() {
+        
+    }
 }

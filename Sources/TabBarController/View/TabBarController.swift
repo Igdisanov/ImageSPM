@@ -17,7 +17,9 @@ public class TabBarController: UITabBarController {
                                  title: "All",
                                  image: "square.grid.3x3")
         
-        let likeImageVC = setupVC(view: LikeImageViewController(), title: "Like", image: "")
+        let likeImageVC = setupVC(view: LikeImageConfigurator.configure(output: nil),
+                                  title: "Like",
+                                  image: "")
         viewControllers = [allImageVC, likeImageVC]
         
     }
