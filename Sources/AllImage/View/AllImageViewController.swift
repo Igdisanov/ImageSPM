@@ -97,7 +97,7 @@ extension AllImageViewController: UISearchBarDelegate {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
             self?.networkDataFetcher.fetchImages(searchTerm: searchText) { (searchResults) in
                 searchResults?.results.map { (user) in
-                    print(user.urls["small"])
+                    print(user.likes)
                 }
             }
         })

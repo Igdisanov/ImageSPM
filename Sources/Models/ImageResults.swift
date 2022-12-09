@@ -17,7 +17,6 @@ public struct ImageData: Decodable {
     public let height: Int
     public let likes: Int
     public let urls: [URLKing.RawValue:String]
-//    public let user: [User.RawValue: String]
     
     public enum URLKing: String {
         case raw
@@ -26,9 +25,4 @@ public struct ImageData: Decodable {
         case small
         case thumb
     }
-    
-//    public enum User: String {
-//        case name
-//        case username
-//    }
 }
