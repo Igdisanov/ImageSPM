@@ -8,18 +8,18 @@
 import Foundation
 
 public struct ImageResults: Decodable {
-    let total: Int
-    let results: [ImageData]
+    public var total: Int
+    public var results: [ImageData]
 }
 
-struct ImageData: Decodable {
-    let width: Int
-    let height: Int
-    let likes: Int
-    let urls: [URLKing.RawValue: String]
-    let user: [User.RawValue: String]
+public struct ImageData: Decodable {
+    public let width: Int
+    public let height: Int
+    public let likes: Int
+    public let urls: [URLKing.RawValue:String]
+//    public let user: [User.RawValue: String]
     
-    enum URLKing: String {
+    public enum URLKing: String {
         case raw
         case full
         case regular
@@ -27,8 +27,8 @@ struct ImageData: Decodable {
         case thumb
     }
     
-    enum User: String {
-        case name
-        case username
-    }
+//    public enum User: String {
+//        case name
+//        case username
+//    }
 }

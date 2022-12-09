@@ -7,11 +7,13 @@
 
 import UIKit
 import NetworkService
+import Models
 
 public class AllImageViewController: UICollectionViewController {
     
     var output: AllImageViewOutput!
-    var networkSwrvice = NetworkService()
+    var networkDataFetcher = NetworkDataFetcher()
+    private var timer: Timer?
     
     private lazy var addBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add,
@@ -91,10 +93,16 @@ extension AllImageViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
-       
-        networkSwrvice.request(searchTerm: searchText) { (_, _)in
-            print("123")
-        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
+            self?.networkDataFetcher.fetchImages(searchTerm: searchText) { (searchResults) in
+                searchResults?.results.map { (user) in
+                    print(user.urls["small"])
+                }
+            }
+        })
+        
+    
     }
     
 }

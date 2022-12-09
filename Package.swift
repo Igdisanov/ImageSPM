@@ -22,7 +22,7 @@ let package = Package(
             dependencies: []),
         .target(
             name: "AllImage",
-            dependencies: []),
+            dependencies: ["Models"]),
         .target(
             name: "LikeImage",
             dependencies: []),
