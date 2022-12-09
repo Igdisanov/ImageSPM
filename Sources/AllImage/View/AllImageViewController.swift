@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import NetworkService
 
 public class AllImageViewController: UICollectionViewController {
+    
+    var output: AllImageViewOutput!
+    var networkSwrvice = NetworkService()
     
     private lazy var addBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add,
@@ -20,8 +24,6 @@ public class AllImageViewController: UICollectionViewController {
                                target: .none,
                                action: #selector(actionBarButtonTapped))
     }()
-    
-    var output: AllImageViewOutput!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,10 @@ extension AllImageViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
+       
+        networkSwrvice.request(searchTerm: searchText) { (_, _)in
+            print("123")
+        }
     }
     
 }
