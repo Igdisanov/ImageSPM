@@ -11,7 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "ImageSPM",
-            targets: ["TabBarController", "AllImage", "LikeImage", "DetailInfo", "NetworkService"]),
+            targets: ["TabBarController", "AllImage", "LikeImage", "DetailInfo", "NetworkService", "Models"]),
     ],
     dependencies: [.package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.4.1"))
                   ],
@@ -31,6 +31,9 @@ let package = Package(
             dependencies: ["Kingfisher"]),
         .target(
             name: "NetworkService",
+            dependencies: []),
+        .target(
+            name: "Models",
             dependencies: [])
     ]
 )
