@@ -17,18 +17,22 @@ class TabBarRouter: TabBarRouterInput {
         
         let allImageVC = setupVC(view: AllImageConfigurator.configure(output: nil),
                                  title: "All",
-                                 image: "square.grid.3x3")
+                                 image: "rectangle.3.group")
         
         let likeImageVC = setupVC(view: LikeImageConfigurator.configure(output: nil),
                                   title: "Like",
-                                  image: "")
+                                  image: "suit.heart")
         view?.returnView().viewControllers = [allImageVC, likeImageVC]
     }
     
     private func setupVC(view: UIViewController, title: String, image: String) -> UIViewController {
         let vc = UINavigationController(rootViewController: view)
         vc.tabBarItem.title = title
-        vc.tabBarItem.image = UIImage(named: image)
+        if #available(iOS 13.0, *) {
+            vc.tabBarItem.image = UIImage(systemName: image)
+        } else {
+            vc.tabBarItem.image = UIImage(named: image)
+        }
         return vc
     }
     
