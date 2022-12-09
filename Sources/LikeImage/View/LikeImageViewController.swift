@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class LikeImageViewController: UIViewController {
+public class LikeImageViewController: UITableViewController {
     
     var output: LikeImageViewOutput!
     

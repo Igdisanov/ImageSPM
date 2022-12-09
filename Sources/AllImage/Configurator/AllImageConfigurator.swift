@@ -11,7 +11,7 @@ open class AllImageConfigurator {
     
     public static func configure(output: Any? = nil) -> AllImageViewController {
         
-        let viewController = AllImageViewController()
+        let viewController = AllImageViewController(collectionViewLayout: UICollectionViewLayout())
         
         let router = AllImageRouter()
         router.view = viewController

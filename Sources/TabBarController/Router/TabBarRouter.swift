@@ -26,7 +26,7 @@ class TabBarRouter: TabBarRouterInput {
     }
     
     private func setupVC(view: UIViewController, title: String, image: String) -> UIViewController {
-        let vc = view
+        let vc = UINavigationController(rootViewController: view)
         vc.tabBarItem.title = title
         vc.tabBarItem.image = UIImage(named: image)
         return vc

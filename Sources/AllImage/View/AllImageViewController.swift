@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AllImageViewController: UIViewController {
+public class AllImageViewController: UICollectionViewController {
     
     var output: AllImageViewOutput!
     
