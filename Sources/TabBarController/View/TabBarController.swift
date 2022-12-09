@@ -13,24 +13,9 @@ public class TabBarController: UITabBarController {
     
     var output: TabBarViewOutput!
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        let allImageVC = setupVC(view: AllImageConfigurator.configure(output: nil),
-                                 title: "All",
-                                 image: "square.grid.3x3")
-        
-        let likeImageVC = setupVC(view: LikeImageConfigurator.configure(output: nil),
-                                  title: "Like",
-                                  image: "")
-        viewControllers = [allImageVC, likeImageVC]
-        
-    }
-    
-    private func setupVC(view: UIViewController, title: String, image: String) -> UIViewController {
-        let vc = view
-        vc.tabBarItem.title = title
-        vc.tabBarItem.image = UIImage(named: image)
-        return vc
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewDidLoad()
     }
 }
 
@@ -39,6 +24,9 @@ public class TabBarController: UITabBarController {
 extension TabBarController: TabBarViewInput {
     
     func setupInitialState() {
-        
+    }
+    
+    func returnView() -> UITabBarController {
+        return self
     }
 }

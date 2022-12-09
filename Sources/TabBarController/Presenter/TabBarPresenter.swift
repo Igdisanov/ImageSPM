@@ -18,6 +18,7 @@ class TabBarPresenter: TabBarInteractorOutput {
 
 extension TabBarPresenter: TabBarViewOutput {
     func viewDidLoad() {
+        router.creatViewControllers()
     }
 }
 
