@@ -13,9 +13,9 @@ open class NetworkDataFetcher {
     
     var netwokService = NetworkService()
     
-    func fetchImages(searchTerm: String, completion: @escaping (ImageResults?) -> ()) {
+    public func fetchImages(searchTerm: String, completion: @escaping (ImageResults?) -> ()) {
         
-        netwokService.request(searchTerm: searchTerm) { (data, error) in
+        netwokService.request(searchTerm: searchTerm) { (data, request, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil)
