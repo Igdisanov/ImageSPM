@@ -16,8 +16,8 @@ struct ImageData: Decodable {
     let width: Int
     let height: Int
     let likes: Int
-    let urls: [URLKing.rawValue: String]
-    let user: [User.rawValue: String]
+    let urls: [URLKing.RawValue: String]
+    let user: [User.RawValue: String]
     
     enum URLKing: String {
         case raw
