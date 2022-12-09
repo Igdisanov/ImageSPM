@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageResults: Decodable {
+public struct ImageResults: Decodable {
     let total: Int
     let results: [ImageData]
 }

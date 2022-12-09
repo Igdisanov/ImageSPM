@@ -31,7 +31,7 @@ let package = Package(
             dependencies: ["Kingfisher"]),
         .target(
             name: "NetworkService",
-            dependencies: []),
+            dependencies: ["Models"]),
         .target(
             name: "Models",
             dependencies: [])

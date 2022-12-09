@@ -11,7 +11,7 @@ import Models
 open class NetworkDataFetcher {
     public init(){}
     
-    func fetchImages(searchTerm: String, completion: () -> ()) {
+    func fetchImages(searchTerm: String, completion: (ImageResults?) -> ()) {
         
     }
 }
