@@ -11,10 +11,21 @@ open class NetworkService {
     public init() {
         
     }
-    public func request(searchTerm: String, completion: (Data?, Error?)-> Void) {
+    public func request(searchTerm: String, completion: @escaping (Data?, Error?)-> Void) {
         let parameters = self.prepareParaments(searchTerm: searchTerm)
         let url = self.url(params: parameters)
-        print(url)
+        
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = prepareHeader()
+        request.httpMethod = "get"
+        let task = createDataTask(from: request, completion: completion)
+        task.resume()
+    }
+    
+    private func prepareHeader() -> [String: String]? {
+        var headers = [String: String]()
+        headers["Authorization"] = "Clien_ID10NtJ-BRSOAMmZ4BaocXWsGOdSNDpVXEu5FjFuq-qG0"
+        return headers
     }
     
     private func prepareParaments(searchTerm: String?) -> [String: String] {
@@ -32,6 +43,14 @@ open class NetworkService {
         components.path = "/search/photos"
         components.queryItems = params.map { URLQueryItem(name: $0, value: $1) }
         return components.url!
+    }
+    
+    private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
+        return URLSession.shared.dataTask(with: request) { (data, _, error) in
+            DispatchQueue.main.async {
+                completion(data, error)
+            }
+        }
     }
     
 }
