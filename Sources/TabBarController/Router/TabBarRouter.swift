@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import AllImage
 import LikeImage
+import AllImage
 
 class TabBarRouter: TabBarRouterInput {
     

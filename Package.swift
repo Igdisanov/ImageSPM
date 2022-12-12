@@ -19,10 +19,10 @@ let package = Package(
         
         .target(
             name: "TabBarController",
-            dependencies: []),
+            dependencies: ["AllImage"]),
         .target(
             name: "AllImage",
-            dependencies: ["Models"]),
+            dependencies: ["Models", "Kingfisher"]),
         .target(
             name: "LikeImage",
             dependencies: []),

@@ -7,8 +7,17 @@
 
 import UIKit
 import Kingfisher
+import Models
 
 class ImageCell: UICollectionViewCell {
+    
+    var image: ImageData! {
+        didSet {
+            let imageUrl = image.urls["regular"]
+            guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {return}
+            imageView.kf.setImage(with: url)
+        }
+    }
     
     static var className: String {
         return String(describing: self)
