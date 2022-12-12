@@ -14,6 +14,7 @@ public class AllImageViewController: UICollectionViewController {
     var output: AllImageViewOutput!
     var networkDataFetcher = NetworkDataFetcher()
     private var timer: Timer?
+    private var images = [ImageData]()
     
     private lazy var addBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add,
@@ -79,7 +80,7 @@ extension AllImageViewController: AllImageViewInput {
 extension AllImageViewController {
     
     public override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return images.count
     }
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,11 +95,10 @@ extension AllImageViewController: UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
-            self?.networkDataFetcher.fetchImages(searchTerm: searchText) { (searchResults) in
-                searchResults?.results.map { (user) in
-                    print(user.likes)
-                }
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
+                guard let fetchedImage = searchResults else {return}
+                self?.images = fetchedImage.results
             }
         })
         

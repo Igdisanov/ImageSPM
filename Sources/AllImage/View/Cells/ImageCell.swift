@@ -1,0 +1,75 @@
+//
+//  ImageCell.swift
+//  
+//
+//  Created by Vadim Igdisanov on 12.12.2022.
+//
+
+import UIKit
+import Kingfisher
+
+class ImageCell: UICollectionViewCell {
+    
+    static var className: String {
+        return String(describing: self)
+    }
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .gray
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    private let checkMark: UIImageView = {
+        let image = UIImage(named: "check-mark")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.alpha = 0
+        return imageView
+    }()
+    
+    override var isSelected: Bool {
+        didSet {
+            updateSelectedState()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        updateSelectedState()
+        setupImageView()
+        setupCheckMark()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupImageView() {
+        addSubview(imageView)
+        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
+    
+    private func setupCheckMark() {
+        addSubview(checkMark)
+        checkMark.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -8).isActive = true
+        checkMark.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -8).isActive = true
+    }
+    
+    private func updateSelectedState() {
+        imageView.alpha = isSelected ? 0.7 : 1
+        checkMark.alpha = isSelected ? 1 : 0
+    }
+    
+}
