@@ -11,25 +11,14 @@ import Models
 
 public class AllImageViewController: UIViewController {
     
+    // MARK: - Visual Components
+    
     private var imageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
         return collectionView
     }()
-    
-    var output: AllImageViewOutput!
-    var networkDataFetcher = NetworkDataFetcher()
-    private var timer: Timer?
-    private var images = [ImageData]()
-    private var selectedImeges = [UIImage]()
-    
-    private var numberOfSelectedPhotos: Int {
-        return imageCollectionView.indexPathsForSelectedItems?.count ?? 0
-    }
-    
-    private let itemsPerRow: CGFloat = 2
-    private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
     private lazy var addBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add,
@@ -49,6 +38,25 @@ public class AllImageViewController: UIViewController {
                                action: #selector(actionBarButtonTapped))
     }()
     
+    // MARK: - Public Properties
+    
+    var output: AllImageViewOutput!
+    var networkDataFetcher = NetworkDataFetcher()
+    
+    // MARK: - Private Properties
+    
+    private var timer: Timer?
+    private var images = [ImageData]()
+    private var selectedImeges = [UIImage]()
+    private let itemsPerRow: CGFloat = 2
+    private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    
+    private var numberOfSelectedPhotos: Int {
+        return imageCollectionView.indexPathsForSelectedItems?.count ?? 0
+    }
+    
+    // MARK: - Initializers
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         updateNavButtonsState()
@@ -57,10 +65,15 @@ public class AllImageViewController: UIViewController {
         setupNavigationBar()
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
-
     }
     
-    func refresh() {
+    // MARK: - Public methods
+    
+    
+    // MARK: - Private Methods
+    
+    
+    private func refresh() {
         self.selectedImeges.removeAll()
         self.imageCollectionView.selectItem(at: nil, animated: true, scrollPosition: [])
         updateNavButtonsState()
@@ -72,6 +85,7 @@ public class AllImageViewController: UIViewController {
         infoBarButton.isEnabled =  numberOfSelectedPhotos == 1
     }
     
+    // MARK: - Action Methods
     
     @objc private func addBarButtonTapped(){
         
@@ -94,6 +108,8 @@ public class AllImageViewController: UIViewController {
         shareController.popoverPresentationController?.permittedArrowDirections = .any
         present(shareController, animated: true)
     }
+    
+    // MARK: - Setup UI
     
     private func setupCollectionView() {
         
@@ -128,7 +144,7 @@ public class AllImageViewController: UIViewController {
     }
 }
 
-     //MARK: AllImageViewInput
+//MARK: - AllImageViewInput
 
 extension AllImageViewController: AllImageViewInput {
     
@@ -137,7 +153,7 @@ extension AllImageViewController: AllImageViewInput {
     }
 }
 
-     //MARK: - setupCollectionView
+//MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -168,29 +184,10 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-     //MARK: - UISearchBarDelegate
 
-extension AllImageViewController: UISearchBarDelegate {
-    
-    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
-                guard let fetchedImage = searchResults else {return}
-                self?.images = fetchedImage.results
-                self?.imageCollectionView.reloadData()
-                self?.refresh()
-            }
-        })
-        
-    
-    }
-    
-}
 
-     //MARK: - UICollectionViewDelegateFlowLayout
- 
+//MARK: - UICollectionViewDelegateFlowLayout
+
 extension AllImageViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let image = images[indexPath.item]
@@ -208,4 +205,25 @@ extension AllImageViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
+}
+
+//MARK: - UISearchBarDelegate
+
+extension AllImageViewController: UISearchBarDelegate {
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
+                guard let fetchedImage = searchResults else {return}
+                self?.images = fetchedImage.results
+                self?.imageCollectionView.reloadData()
+                self?.refresh()
+            }
+        })
+        
+        
+    }
+    
 }
