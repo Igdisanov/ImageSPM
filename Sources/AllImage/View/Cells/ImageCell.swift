@@ -32,11 +32,10 @@ class ImageCell: UICollectionViewCell {
     }()
     
     private let checkMark: UIImageView = {
-        let image = #imageLiteral(resourceName: "State") 
+        var image = UIImage(named: "State", in: Bundle.module, compatibleWith: nil)
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 0
-        imageView.backgroundColor = .red
         return imageView
     }()
     
