@@ -32,10 +32,11 @@ class ImageCell: UICollectionViewCell {
     }()
     
     private let checkMark: UIImageView = {
-        let image = UIImage(named: "check-mark")
+        let image = #imageLiteral(resourceName: "State") 
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 0
+        imageView.backgroundColor = .red
         return imageView
     }()
     
@@ -71,7 +72,7 @@ class ImageCell: UICollectionViewCell {
     }
     
     private func setupCheckMark() {
-        addSubview(checkMark)
+        imageView.addSubview(checkMark)
         checkMark.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -8).isActive = true
         checkMark.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -8).isActive = true
     }

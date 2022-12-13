@@ -66,6 +66,7 @@ public class AllImageViewController: UIViewController {
         imageCollectionView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         imageCollectionView.contentInsetAdjustmentBehavior = .automatic
         imageCollectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.className)
+        imageCollectionView.allowsMultipleSelection = true
         
     }
     
