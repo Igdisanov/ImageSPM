@@ -71,13 +71,15 @@ class ImageCell: UICollectionViewCell {
     }
     
     private func setupCheckMark() {
-        imageView.addSubview(checkMark)
+        addSubview(checkMark)
         checkMark.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -8).isActive = true
         checkMark.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -8).isActive = true
+        checkMark.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        checkMark.widthAnchor.constraint(equalToConstant: 16).isActive = true
     }
     
     private func updateSelectedState() {
-        imageView.alpha = isSelected ? 0.7 : 1
+        imageView.alpha = isSelected ? 0.6 : 1
         checkMark.alpha = isSelected ? 1 : 0
     }
     
