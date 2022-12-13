@@ -22,6 +22,7 @@ public class AllImageViewController: UIViewController {
     var networkDataFetcher = NetworkDataFetcher()
     private var timer: Timer?
     private var images = [ImageData]()
+    private var selectedImeges = [UIImage]()
     
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -32,9 +33,15 @@ public class AllImageViewController: UIViewController {
                                action: #selector(addBarButtonTapped))
     }()
     
-    private lazy var actionBarButton: UIBarButtonItem = {
+    private lazy var infoBarButton: UIBarButtonItem = {
         return UIBarButtonItem(title: "info", style: .done,
                                target: .none,
+                               action: #selector(infoBarButtonTapped))
+    }()
+    
+    private lazy var actionBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .action,
+                               target: self,
                                action: #selector(actionBarButtonTapped))
     }()
     
@@ -50,10 +57,26 @@ public class AllImageViewController: UIViewController {
     }
     
     
-    @objc private func addBarButtonTapped(){    }
-    
-    @objc private func actionBarButtonTapped(){
+    @objc private func addBarButtonTapped(){
         
+    }
+    
+    @objc private func infoBarButtonTapped(){
+        
+    }
+    
+    @objc private func actionBarButtonTapped(sender: UIBarButtonItem){
+        let shareController = UIActivityViewController(activityItems: selectedImeges, applicationActivities: nil)
+        shareController.completionWithItemsHandler = { _, bool, _, _ in
+            if bool {
+                
+            }
+            
+        }
+        
+        shareController.popoverPresentationController?.barButtonItem = sender
+        shareController.popoverPresentationController?.permittedArrowDirections = .any
+        present(shareController, animated: true)
     }
     
     private func setupCollectionView() {
@@ -76,7 +99,8 @@ public class AllImageViewController: UIViewController {
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         titleLabel.textColor = .gray
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        navigationItem.rightBarButtonItems = [actionBarButton, addBarButton]
+        navigationItem.rightBarButtonItems = [actionBarButton, addBarButton, infoBarButton]
+        
     }
     
     private func setupSearchBar() {
@@ -109,6 +133,20 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.className, for: indexPath) as! ImageCell
         cell.image = images[indexPath.item]
         return cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
+        guard let image = cell.imageView.image else {return}
+        selectedImeges.append(image)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
+        guard let image = cell.imageView.image else {return}
+        if let index = selectedImeges.firstIndex(of: image) {
+            selectedImeges.remove(at: index)
+        }
     }
 }
 

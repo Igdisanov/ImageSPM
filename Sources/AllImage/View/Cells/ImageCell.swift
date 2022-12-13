@@ -11,6 +11,8 @@ import Models
 
 class ImageCell: UICollectionViewCell {
     
+    // MARK: - Visual Components
+    
     var image: ImageData! {
         didSet {
             let imageUrl = image.urls["regular"]
@@ -19,11 +21,9 @@ class ImageCell: UICollectionViewCell {
         }
     }
     
-    static var className: String {
-        return String(describing: self)
-    }
+    // MARK: - Private Properties
     
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .gray
@@ -38,6 +38,8 @@ class ImageCell: UICollectionViewCell {
         imageView.alpha = 0
         return imageView
     }()
+    
+    
     
     override var isSelected: Bool {
         didSet {
@@ -62,6 +64,8 @@ class ImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
+    
     private func setupImageView() {
         addSubview(imageView)
         imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -81,6 +85,10 @@ class ImageCell: UICollectionViewCell {
     private func updateSelectedState() {
         imageView.alpha = isSelected ? 0.6 : 1
         checkMark.alpha = isSelected ? 1 : 0
+    }
+    
+    static var className: String {
+        return String(describing: self)
     }
     
 }
