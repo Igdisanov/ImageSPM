@@ -24,6 +24,10 @@ public class AllImageViewController: UIViewController {
     private var images = [ImageData]()
     private var selectedImeges = [UIImage]()
     
+    private var numberOfSelectedPhotos: Int {
+        return imageCollectionView.indexPathsForSelectedItems?.count ?? 0
+    }
+    
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
@@ -47,13 +51,25 @@ public class AllImageViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateNavButtonsState()
         setupCollectionView()
         setupSearchBar()
         setupNavigationBar()
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
 
+    }
+    
+    func refresh() {
+        self.selectedImeges.removeAll()
+        self.imageCollectionView.selectItem(at: nil, animated: true, scrollPosition: [])
+        updateNavButtonsState()
+    }
+    
+    private func updateNavButtonsState() {
+        addBarButton.isEnabled = numberOfSelectedPhotos > 0
+        actionBarButton.isEnabled = numberOfSelectedPhotos > 0
+        infoBarButton.isEnabled =  numberOfSelectedPhotos == 1
     }
     
     
@@ -69,7 +85,7 @@ public class AllImageViewController: UIViewController {
         let shareController = UIActivityViewController(activityItems: selectedImeges, applicationActivities: nil)
         shareController.completionWithItemsHandler = { _, bool, _, _ in
             if bool {
-                
+                self.refresh()
             }
             
         }
@@ -136,12 +152,14 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        updateNavButtonsState()
         let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
         guard let image = cell.imageView.image else {return}
         selectedImeges.append(image)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateNavButtonsState()
         let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
         guard let image = cell.imageView.image else {return}
         if let index = selectedImeges.firstIndex(of: image) {
@@ -156,12 +174,13 @@ extension AllImageViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
-        
+        timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
                 guard let fetchedImage = searchResults else {return}
                 self?.images = fetchedImage.results
                 self?.imageCollectionView.reloadData()
+                self?.refresh()
             }
         })
         
