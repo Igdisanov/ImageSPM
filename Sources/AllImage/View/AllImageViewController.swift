@@ -50,7 +50,6 @@ public class AllImageViewController: UIViewController {
     private var selectedImeges = [UIImage]()
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    
     private var numberOfSelectedPhotos: Int {
         return imageCollectionView.indexPathsForSelectedItems?.count ?? 0
     }
@@ -66,9 +65,6 @@ public class AllImageViewController: UIViewController {
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
     }
-    
-    // MARK: - Public methods
-    
     
     // MARK: - Private Methods
     
@@ -96,12 +92,13 @@ public class AllImageViewController: UIViewController {
     }
     
     @objc private func actionBarButtonTapped(sender: UIBarButtonItem){
-        let shareController = UIActivityViewController(activityItems: selectedImeges, applicationActivities: nil)
+        let shareController = UIActivityViewController(activityItems: selectedImeges,
+                                                       applicationActivities: nil)
+        
         shareController.completionWithItemsHandler = { _, bool, _, _ in
             if bool {
                 self.refresh()
             }
-            
         }
         
         shareController.popoverPresentationController?.barButtonItem = sender
@@ -112,7 +109,6 @@ public class AllImageViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupCollectionView() {
-        
         self.view.addSubview(imageCollectionView)
         imageCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         imageCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -122,7 +118,6 @@ public class AllImageViewController: UIViewController {
         imageCollectionView.contentInsetAdjustmentBehavior = .automatic
         imageCollectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.className)
         imageCollectionView.allowsMultipleSelection = true
-        
     }
     
     private func setupNavigationBar() {
@@ -147,9 +142,10 @@ public class AllImageViewController: UIViewController {
 //MARK: - AllImageViewInput
 
 extension AllImageViewController: AllImageViewInput {
-    
-    func setupInitialState() {
-        
+    func setupInitialState(images: [Models.ImageData]) {
+        self.images = images
+        self.imageCollectionView.reloadData()
+        self.refresh()
     }
 }
 
@@ -157,11 +153,13 @@ extension AllImageViewController: AllImageViewInput {
 
 extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView,
+                               numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView,
+                               cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.className, for: indexPath) as! ImageCell
         cell.image = images[indexPath.item]
         return cell
@@ -189,7 +187,9 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension AllImageViewController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAt indexPath: IndexPath) -> CGSize {
         let image = images[indexPath.item]
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
@@ -198,11 +198,15 @@ extension AllImageViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widhtPerItem, height: height)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
 }
@@ -215,15 +219,7 @@ extension AllImageViewController: UISearchBarDelegate {
         print(searchText)
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
-                guard let fetchedImage = searchResults else {return}
-                self?.images = fetchedImage.results
-                self?.imageCollectionView.reloadData()
-                self?.refresh()
-            }
+            self.output.requestSearchImage(searchTerm: searchText)
         })
-        
-        
     }
-    
 }

@@ -22,7 +22,7 @@ let package = Package(
             dependencies: ["AllImage"]),
         .target(
             name: "AllImage",
-            dependencies: ["Models", "Kingfisher"],
+            dependencies: ["Models", "Kingfisher", "NetworkService"],
             resources: [.process("Media.xcassets")]),
         .target(
             name: "LikeImage",
