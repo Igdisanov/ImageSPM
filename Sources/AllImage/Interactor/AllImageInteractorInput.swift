@@ -8,5 +8,5 @@
 import Models
 
 protocol AllImageInteractorInput {
-    func fetchSearchImages(searchTerm: String, completion: @escaping ([ImageData]?) -> ())
+    func fetchImages(searchTerm: String?, completion: @escaping ([ImageData]?) -> ())
 }

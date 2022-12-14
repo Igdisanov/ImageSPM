@@ -13,19 +13,23 @@ open class NetworkDataFetcher {
     
     var netwokService = NetworkService()
     
-    public func fetchImages(searchTerm: String, completion: @escaping (ImageResults?) -> ()) {
+    public func fetchImages(searchTerm: String?, completion: @escaping (Any?) -> ()) {
         
         netwokService.request(searchTerm: searchTerm) { (data, request, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil)
             }
-            
-            let decode = self.decodeJSON(type: ImageResults.self, from: data)
-            completion(decode)
+            if searchTerm != nil {
+                let decode = self.decodeJSON(type: ImageResults.self, from: data)
+                completion(decode)
+            } else {
+                let decode = self.decodeJSON(type: [ImageData].self, from: data)
+                completion(decode)
+            }
         }
     }
-    
+        
     func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
         let decoder = JSONDecoder()
         

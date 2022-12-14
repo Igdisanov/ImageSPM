@@ -19,11 +19,18 @@ class AllImageInteractor {
 
 extension AllImageInteractor: AllImageInteractorInput {
     
-    func fetchSearchImages(searchTerm: String, completion: @escaping ([ImageData]?) -> ())   {
-        self.networkDataFetcher.fetchImages(searchTerm: searchTerm) { (searchResults) in
-            guard let fetchedImage = searchResults else {return}
-            DispatchQueue.main.async {
-                completion(fetchedImage.results)
+    func fetchImages(searchTerm: String?, completion: @escaping ([ImageData]?) -> ())   {
+        self.networkDataFetcher.fetchImages(searchTerm: searchTerm) { (fetchData) in
+            if searchTerm != nil {
+                guard let fetchedImages = fetchData as? ImageResults  else {return}
+                DispatchQueue.main.async {
+                    completion(fetchedImages.results)
+                }
+            } else {
+                guard let images = fetchData as? [ImageData]  else {return}
+                DispatchQueue.main.async {
+                    completion(images)
+                }
             }
         }
     }

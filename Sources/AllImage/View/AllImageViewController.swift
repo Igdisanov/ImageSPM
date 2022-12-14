@@ -64,6 +64,12 @@ public class AllImageViewController: UIViewController {
         setupNavigationBar()
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
+        
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.output.requestImage(searchTerm: nil)
     }
     
     // MARK: - Private Methods
@@ -219,7 +225,16 @@ extension AllImageViewController: UISearchBarDelegate {
         print(searchText)
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.output.requestSearchImage(searchTerm: searchText)
+            if searchText.isEmpty {
+                self.output.requestImage(searchTerm: nil)
+            } else {
+                self.output.requestImage(searchTerm: searchText)
+            }
+            
         })
+    }
+    
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.output.requestImage(searchTerm: nil)
     }
 }

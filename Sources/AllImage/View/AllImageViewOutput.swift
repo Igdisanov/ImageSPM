@@ -9,5 +9,5 @@ import Models
 
 protocol AllImageViewOutput: AnyObject {
     func viewDidLoad()
-    func requestSearchImage(searchTerm: String)
+    func requestImage(searchTerm: String?)
 }
