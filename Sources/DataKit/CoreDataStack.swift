@@ -8,12 +8,13 @@
 import UIKit
 import CoreData
   
+
 @available(iOS 13.0, *)
-@objc(ImageData)
+@objc(ImageInfo)
 open class CoreDataStack: NSObject {
-    lazy var persistentContainer: NSPersistentContainer = {
+    public lazy var persistentContainer: NSPersistentContainer = {
         
-        let bundle = Bundle.main
+        let bundle = Bundle.module
         guard let modelURL = bundle.url(forResource: "ImageForSfera", withExtension: ".momd"),
               let model = NSManagedObjectModel(contentsOf: modelURL) else { return (NSPersistentContainer())
         }

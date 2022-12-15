@@ -6,6 +6,7 @@
 //
 
 import Models
+import CoreData
 
 protocol AllImageInteractorInput {
     func fetchImages(searchTerm: String?, completion: @escaping ([ImageData]?) -> ())

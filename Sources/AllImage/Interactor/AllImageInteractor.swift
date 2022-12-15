@@ -9,6 +9,7 @@ import NetworkService
 import Models
 import CoreData
 import UIKit
+import DataKit
 
 class AllImageInteractor {
     
@@ -40,10 +41,11 @@ extension AllImageInteractor: AllImageInteractorInput {
 
 //MARK: - CoreData
 
+@available(iOS 13.0, *)
 extension AllImageInteractor {
     
     private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! CoreDataStack
         return appDelegate.persistentContainer.viewContext
     }
     
