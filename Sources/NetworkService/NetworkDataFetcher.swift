@@ -24,7 +24,7 @@ open class NetworkDataFetcher {
                 let decode = self.decodeJSON(type: ImageResults.self, from: data)
                 completion(decode)
             } else {
-                let decode = self.decodeJSON(type: [ImageData].self, from: data)
+                let decode = self.decodeJSON(type: [ImageDataInfo].self, from: data)
                 completion(decode)
             }
         }

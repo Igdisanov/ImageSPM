@@ -8,5 +8,5 @@
 import Models
 
 protocol AllImageViewInput: AnyObject {
-    func setupInitialState(images: [ImageData])
+    func setupInitialState(images: [ImageDataInfo])
 }

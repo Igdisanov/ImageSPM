@@ -13,7 +13,7 @@ class ImageCell: UICollectionViewCell {
     
     // MARK: - Visual Components
     
-    var image: ImageData! {
+    var image: ImageDataInfo! {
         didSet {
             let imageUrl = image.urls["regular"]
             guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {return}

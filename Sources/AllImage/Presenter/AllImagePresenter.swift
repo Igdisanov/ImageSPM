@@ -18,7 +18,7 @@ class AllImagePresenter: AllImageInteractorOutput {
     
     // MARK: - Private Properties
     
-    private var images = [ImageData]() {
+    private var images = [ImageDataInfo]() {
         didSet {
             self.view.setupInitialState(images: images)
         }

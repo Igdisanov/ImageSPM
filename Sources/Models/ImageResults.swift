@@ -9,10 +9,10 @@ import Foundation
 
 public struct ImageResults: Decodable {
     public var total: Int
-    public var results: [ImageData]
+    public var results: [ImageDataInfo]
 }
 
-public struct ImageData: Decodable {
+public struct ImageDataInfo: Decodable {
     public let width: Int
     public let height: Int
     public let likes: Int

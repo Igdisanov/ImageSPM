@@ -46,7 +46,7 @@ public class AllImageViewController: UIViewController {
     // MARK: - Private Properties
     
     private var timer: Timer?
-    private var images = [ImageData]()
+    private var images = [ImageDataInfo]()
     private var selectedImeges = [UIImage]()
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -148,7 +148,7 @@ public class AllImageViewController: UIViewController {
 //MARK: - AllImageViewInput
 
 extension AllImageViewController: AllImageViewInput {
-    func setupInitialState(images: [Models.ImageData]) {
+    func setupInitialState(images: [Models.ImageDataInfo]) {
         self.images = images
         self.imageCollectionView.reloadData()
         self.refresh()
