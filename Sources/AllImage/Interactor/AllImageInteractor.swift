@@ -4,9 +4,11 @@
 //
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
-import Foundation
+
 import NetworkService
 import Models
+import CoreData
+import UIKit
 
 class AllImageInteractor {
     
@@ -34,4 +36,15 @@ extension AllImageInteractor: AllImageInteractorInput {
             }
         }
     }
+}
+
+//MARK: - CoreData
+
+extension AllImageInteractor {
+    
+    private func getContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
 }
