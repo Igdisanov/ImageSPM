@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-
+@objc(ImageInfo)
 public class ImageInfo: NSManagedObject {
 
 }

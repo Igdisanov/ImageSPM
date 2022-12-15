@@ -39,6 +39,14 @@ extension AllImagePresenter: AllImageViewOutput {
             self.images = images
         }
     }
+    
+    func savePhotos(photos: [ImageDataInfo]) {
+        interactor.savePhotos(photos: photos)
+    }
+    
+    func getPhotos() {
+        interactor.getPhotos()
+    }
 }
 
      //MARK: - AllImageModuleInput

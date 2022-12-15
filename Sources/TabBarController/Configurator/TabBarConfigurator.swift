@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 open class TabBarConfigurator {
     
     public static func configure(output: Any? = nil) -> TabBarController {

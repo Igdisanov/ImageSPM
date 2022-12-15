@@ -9,6 +9,7 @@ import UIKit
 import LikeImage
 import AllImage
 
+@available(iOS 13.0, *)
 class TabBarRouter: TabBarRouterInput {
     
     weak var view: TabBarViewInput?
@@ -28,11 +29,9 @@ class TabBarRouter: TabBarRouterInput {
     private func setupVC(view: UIViewController, title: String, image: String) -> UIViewController {
         let vc = UINavigationController(rootViewController: view)
         vc.tabBarItem.title = title
-        if #available(iOS 13.0, *) {
-            vc.tabBarItem.image = UIImage(systemName: image)
-        } else {
-            vc.tabBarItem.image = UIImage(named: image)
-        }
+        
+        vc.tabBarItem.image = UIImage(systemName: image)
+        
         return vc
     }
     

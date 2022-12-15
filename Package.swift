@@ -26,7 +26,7 @@ let package = Package(
             resources: [.process("Media.xcassets")]),
         .target(
             name: "LikeImage",
-            dependencies: ["DataKit"]),
+            dependencies: ["DataKit", "Kingfisher"]),
         .target(
             name: "DetailInfo",
             dependencies: ["Kingfisher"]),

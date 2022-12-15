@@ -10,7 +10,6 @@ import CoreData
   
 
 @available(iOS 13.0, *)
-@objc(ImageInfo)
 open class CoreDataStack: NSObject {
     public lazy var persistentContainer: NSPersistentContainer = {
         

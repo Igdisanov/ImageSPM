@@ -17,10 +17,12 @@ class AllImageInteractor {
     // MARK: - Public Properties
     weak var output: AllImageInteractorOutput!
     var networkDataFetcher = NetworkDataFetcher()
+    var savedPhotos: [ImageInfo] = []
 }
 
 //MARK: - AllImageInteractorInput
 
+@available(iOS 13.0, *)
 extension AllImageInteractor: AllImageInteractorInput {
     
     func fetchImages(searchTerm: String?, completion: @escaping ([ImageDataInfo]?) -> ())   {
@@ -38,16 +40,27 @@ extension AllImageInteractor: AllImageInteractorInput {
             }
         }
     }
+    
+    func savePhotos(photos: [ImageDataInfo]) {
+        for photo in photos {
+            self.savePhoto(photo: photo)
+        }
+    }
+    
+    func getPhotos() {
+        self.getData()
+        print(savedPhotos.first?.small)
+    }
+    
 }
 
 //MARK: - CoreData
 
 @available(iOS 13.0, *)
-@objc(ImageInfo)
 extension AllImageInteractor {
     
     private func getContext() -> NSManagedObjectContext {
-        let coreDataStack = UIApplication.shared.delegate as! CoreDataStack
+        let coreDataStack = CoreDataStack()
         return coreDataStack.persistentContainer.viewContext
     }
     
@@ -55,15 +68,26 @@ extension AllImageInteractor {
         let context = getContext()
         guard let entity = NSEntityDescription.entity(forEntityName: "ImageInfo", in: context) else {return}
         let photoObject = ImageInfo(entity: entity, insertInto: context)
-        photoObject.likes = photo.likes
-        photoObject.height = photo.height
-        photoObject.width = photo.width
+        photoObject.likes = Int32(photo.likes)
+        photoObject.height = Int32(photo.height)
+        photoObject.width = Int32(photo.width)
         photoObject.regular = photo.urls["regular"]
         photoObject.small = photo.urls["small"]
         
         
         do {
-            try context.save()        } catch let error as NSError {
+            try context.save()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func getData() {
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        do {
+            savedPhotos = try context.fetch(fetchRequest)
+        } catch let error as NSError {
             print(error.localizedDescription)
         }
     }

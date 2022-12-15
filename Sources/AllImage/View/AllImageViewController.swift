@@ -27,8 +27,8 @@ public class AllImageViewController: UIViewController {
     }()
     
     private lazy var infoBarButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: "info", style: .done,
-                               target: .none,
+        return UIBarButtonItem(barButtonSystemItem: .trash,
+                               target: self,
                                action: #selector(infoBarButtonTapped))
     }()
     
@@ -90,11 +90,13 @@ public class AllImageViewController: UIViewController {
     // MARK: - Action Methods
     
     @objc private func addBarButtonTapped(){
-        
+        if !images.isEmpty {
+            output.savePhotos(photos: images)
+        }
     }
     
     @objc private func infoBarButtonTapped(){
-        
+        output.getPhotos()
     }
     
     @objc private func actionBarButtonTapped(sender: UIBarButtonItem){

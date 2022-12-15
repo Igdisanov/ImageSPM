@@ -16,11 +16,11 @@ extension ImageInfo {
         return NSFetchRequest<ImageInfo>(entityName: "ImageInfo")
     }
 
-    @NSManaged public var height: Int
-    @NSManaged public var likes: Int
+    @NSManaged public var height: Int32
+    @NSManaged public var likes: Int32
     @NSManaged public var regular: String?
     @NSManaged public var small: String?
-    @NSManaged public var width: Int
+    @NSManaged public var width: Int32
 
 }
 

@@ -10,4 +10,6 @@ import Models
 protocol AllImageViewOutput: AnyObject {
     func viewDidLoad()
     func requestImage(searchTerm: String?)
+    func savePhotos(photos: [ImageDataInfo])
+    func getPhotos()
 }
