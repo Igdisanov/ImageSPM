@@ -13,6 +13,7 @@ public struct ImageResults: Decodable {
 }
 
 public struct ImageDataInfo: Decodable {
+    public let id: String
     public let width: Int
     public let height: Int
     public let likes: Int

@@ -49,7 +49,6 @@ extension AllImageInteractor: AllImageInteractorInput {
     
     func getPhotos() {
         self.getData()
-        print(savedPhotos.first?.small)
     }
     
 }
@@ -73,6 +72,7 @@ extension AllImageInteractor {
         photoObject.width = Int32(photo.width)
         photoObject.regular = photo.urls["regular"]
         photoObject.small = photo.urls["small"]
+        photoObject.id = photo.id
         
         
         do {

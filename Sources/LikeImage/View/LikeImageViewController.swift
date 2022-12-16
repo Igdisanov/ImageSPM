@@ -8,16 +8,24 @@
 import UIKit
 import Models
 import CoreData
+import DataKit
+import Kingfisher
 
 public class LikeImageViewController: UIViewController {
     
     var output: LikeImageViewOutput!
     let imageTableView = UITableView()
-    private var savedPhotos = [String]()
+    private var savedImages = [ImageInfo]()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.output.viewWillAppear()
     }
     
     private func setupTableView() {
@@ -40,6 +48,11 @@ public class LikeImageViewController: UIViewController {
 //MARK: - LikeImageViewInput
 
 extension LikeImageViewController: LikeImageViewInput {
+    func setSavedImages(images: [DataKit.ImageInfo]) {
+        self.savedImages = images
+        imageTableView.reloadData()
+    }
+    
     
     func setupInitialState() {
         
@@ -50,14 +63,14 @@ extension LikeImageViewController: LikeImageViewInput {
 extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        5
+        savedImages.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.className, for: indexPath) as! ImageTableCell
-        
-        cell.image = "https://ilinks.io/static/images/main.webp"
-        
+        let image = savedImages[indexPath.row]
+        guard let imageUrl = image.regular, let url = URL(string: imageUrl) else {return cell}
+        cell.castomImageView.kf.setImage(with: url)
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return cell
     }
@@ -65,4 +78,11 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    
+    
 }

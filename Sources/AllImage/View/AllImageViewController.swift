@@ -47,7 +47,7 @@ public class AllImageViewController: UIViewController {
     
     private var timer: Timer?
     private var images = [ImageDataInfo]()
-    private var selectedImeges = [UIImage]()
+    private var selectedImeges = [ImageDataInfo]()
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     private var numberOfSelectedPhotos: Int {
@@ -91,7 +91,8 @@ public class AllImageViewController: UIViewController {
     
     @objc private func addBarButtonTapped(){
         if !images.isEmpty {
-            output.savePhotos(photos: images)
+            output.savePhotos(photos: selectedImeges)
+            refresh()
         }
     }
     
@@ -176,16 +177,18 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         updateNavButtonsState()
         let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
-        guard let image = cell.imageView.image else {return}
+        guard let image = cell.image else {return}
         selectedImeges.append(image)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         updateNavButtonsState()
         let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
-        guard let image = cell.imageView.image else {return}
-        if let index = selectedImeges.firstIndex(of: image) {
-            selectedImeges.remove(at: index)
+        guard let image = cell.image else {return}
+        for (i, value) in selectedImeges.enumerated() {
+            if image.id == value.id {
+                selectedImeges.remove(at: i)
+            }
         }
     }
 }

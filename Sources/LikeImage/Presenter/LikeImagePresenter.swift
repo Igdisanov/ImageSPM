@@ -5,6 +5,8 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
+import DataKit
+
 class LikeImagePresenter: LikeImageInteractorOutput {
     
     weak var view: LikeImageViewInput!
@@ -18,6 +20,14 @@ class LikeImagePresenter: LikeImageInteractorOutput {
 
 extension LikeImagePresenter: LikeImageViewOutput {
     func viewDidLoad() {
+    }
+    func viewWillAppear() {
+        let images = self.interactor.getImage()
+        view.setSavedImages(images: images)
+    }
+    
+    func deleteImage(image: ImageInfo) {
+        interactor.deleteImage(image: image)
     }
 }
 

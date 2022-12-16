@@ -8,32 +8,17 @@
 import UIKit
 import Kingfisher
 import Models
+import DataKit
 
 class ImageTableCell: UITableViewCell {
     
     // MARK: - Visual Components
     
-//    var image: ImageData! {
-//        didSet {
-//            let imageUrl = image.urls["small"]
-//            guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {return}
-//            castomImageView.kf.setImage(with: url)
-//        }
-//    }
-    
-    var image: String! {
-        didSet {
-            let imageUrl = image
-            guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {return}
-            castomImageView.kf.setImage(with: url)
-        }
-    }
-    
-    let castomImageView: UIImageView = {
+    var castomImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -44,8 +29,9 @@ class ImageTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         setupImageView()
@@ -53,11 +39,12 @@ class ImageTableCell: UITableViewCell {
     }
     
     private func setupImageView() {
+        
         addSubview(castomImageView)
         castomImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         castomImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
         castomImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-        castomImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
+        castomImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
     
     static var className: String {
