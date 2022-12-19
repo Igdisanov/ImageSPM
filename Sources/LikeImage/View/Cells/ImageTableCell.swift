@@ -36,9 +36,9 @@ class ImageTableCell: UITableViewCell {
     }
     
     func setupUICell(image: ImageInfo?) {
-        guard let imageUrl = image?.regular, let url = URL(string: imageUrl) else {return}
+        guard let imageUrl = image?.regular, let url = URL(string: imageUrl), let likes = image?.likes else {return}
         castomImageView.kf.setImage(with: url)
-        likeLabel.text = "\(String(describing: image?.likes)) ♥️"
+        likeLabel.text = "\(likes) ♥️"
         setupImageView()
         setupLikeLabel()
     }
