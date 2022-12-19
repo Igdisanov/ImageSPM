@@ -14,7 +14,14 @@ class ImageTableCell: UITableViewCell {
     
     // MARK: - Visual Components
     
-    var castomImageView: UIImageView = {
+    private var likeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
+    private var castomImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .white
@@ -25,17 +32,15 @@ class ImageTableCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         castomImageView.image = nil
+        likeLabel.text = nil
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func setupUICell(image: ImageInfo) {
+        guard let imageUrl = image.regular, let url = URL(string: imageUrl) else {return}
+        castomImageView.kf.setImage(with: url)
+        likeLabel.text = "\(image.likes) ♥️"
         setupImageView()
-        // Configure the view for the selected state
+        setupLikeLabel()
     }
     
     private func setupImageView() {
@@ -45,6 +50,12 @@ class ImageTableCell: UITableViewCell {
         castomImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
         castomImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         castomImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+    }
+    
+    private func setupLikeLabel() {
+        addSubview(likeLabel)
+        likeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        likeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
     }
     
     static var className: String {

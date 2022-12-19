@@ -19,15 +19,12 @@ class LikeImagePresenter: LikeImageInteractorOutput {
      //MARK:LikeImageViewOutput
 
 extension LikeImagePresenter: LikeImageViewOutput {
-    func viewDidLoad() {
-    }
-    func viewWillAppear() {
-        let images = self.interactor.getImage()
-        view.setSavedImages(images: images)
-    }
     
     func deleteImage(image: ImageInfo) {
-        interactor.deleteImage(image: image)
+        self.interactor.deleteImage(image: image)
+    }
+    
+    func viewDidLoad() {
     }
 }
 

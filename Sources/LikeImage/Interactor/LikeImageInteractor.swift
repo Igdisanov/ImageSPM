@@ -19,10 +19,6 @@ class LikeImageInteractor {
 
 @available(iOS 13.0, *)
 extension LikeImageInteractor: LikeImageInteractorInput {
-    func getImage() -> [ImageInfo] {
-        self.getData()
-        return savedPhotos
-    }
     
     func deleteImage(image: ImageInfo) {
         self.deleteData(photo: image)
@@ -37,16 +33,6 @@ extension LikeImageInteractor {
     private func getContext() -> NSManagedObjectContext {
         let coreDataStack = CoreDataStack()
         return coreDataStack.persistentContainer.viewContext
-    }
-    
-    private func getData() {
-        let context = getContext()
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        do {
-            savedPhotos = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
     }
     
     private func deleteData(photo: ImageInfo) {

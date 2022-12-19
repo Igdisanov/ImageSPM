@@ -9,5 +9,4 @@ import DataKit
 
 protocol LikeImageViewInput: AnyObject {
     func viewDidLoad()
-    func setSavedImages(images: [ImageInfo])
 }

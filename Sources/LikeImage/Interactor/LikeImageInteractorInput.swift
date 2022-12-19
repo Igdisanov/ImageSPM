@@ -8,6 +8,5 @@
 import DataKit
 
 protocol LikeImageInteractorInput {
-    func getImage() -> [ImageInfo]
     func deleteImage(image: ImageInfo)
 }

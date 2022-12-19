@@ -9,6 +9,5 @@ import DataKit
 
 protocol LikeImageViewOutput: AnyObject {
     func viewDidLoad()
-    func viewWillAppear()
     func deleteImage(image: ImageInfo)
 }

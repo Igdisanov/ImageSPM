@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-  
 
 @available(iOS 13.0, *)
 open class CoreDataStack: NSObject {
@@ -42,6 +41,5 @@ open class CoreDataStack: NSObject {
             }
         }
     }
-
 }
 
