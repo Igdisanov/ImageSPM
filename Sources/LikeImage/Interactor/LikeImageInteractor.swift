@@ -9,6 +9,7 @@ import CoreData
 import UIKit
 import DataKit
 
+@available(iOS 13.0, *)
 class LikeImageInteractor {
     
     weak var output: LikeImageInteractorOutput!
@@ -19,6 +20,10 @@ class LikeImageInteractor {
 
 @available(iOS 13.0, *)
 extension LikeImageInteractor: LikeImageInteractorInput {
+    
+    func getImage(with: NSFetchedResultsControllerDelegate) -> EmployeeProvider {
+        return fetchImage(with: with)
+    }
     
     func deleteImage(image: ImageInfo) {
         self.deleteData(photo: image)
@@ -33,6 +38,11 @@ extension LikeImageInteractor {
     private func getContext() -> NSManagedObjectContext {
         let coreDataStack = CoreDataStack()
         return coreDataStack.persistentContainer.viewContext
+    }
+    
+    private func fetchImage(with: NSFetchedResultsControllerDelegate) -> EmployeeProvider {
+        let provider = EmployeeProvider(with: with)
+        return provider
     }
     
     private func deleteData(photo: ImageInfo) {

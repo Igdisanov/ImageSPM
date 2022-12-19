@@ -14,14 +14,10 @@ import Kingfisher
 @available(iOS 13.0, *)
 public class LikeImageViewController: UIViewController {
     
-    private lazy var provider: EmployeeProvider = {
-        let dataProvider = EmployeeProvider(with: self)
-        return dataProvider
-    }()
-    
     var output: LikeImageViewOutput!
     let imageTableView = UITableView()
     private var savedImages = [ImageInfo]()
+    private var provider: EmployeeProvider?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +26,8 @@ public class LikeImageViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        output.getImages(with: self)
+        self.imageTableView.reloadData()
     }
     
     private func setupTableView() {
@@ -53,8 +51,8 @@ public class LikeImageViewController: UIViewController {
 
 @available(iOS 13.0, *)
 extension LikeImageViewController: LikeImageViewInput {
-    func setupInitialState() {
-        
+    func setupInitialState(provider: EmployeeProvider?) {
+        self.provider = provider
     }
 }
 
@@ -63,20 +61,22 @@ extension LikeImageViewController: LikeImageViewInput {
 extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        provider.fetchedResultController.fetchedObjects?.count ?? 0
+        provider?.fetchedResultController.fetchedObjects?.count ?? 0
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.className, for: indexPath) as! ImageTableCell
-        let image = provider.fetchedResultController.object(at: indexPath)
+        let image = provider?.fetchedResultController.object(at: indexPath)
         cell.setupUICell(image: image)
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return cell
     }
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let image = provider.fetchedResultController.object(at: indexPath)
+        guard let image = provider?.fetchedResultController.object(at: indexPath) else {return}
         output.deleteImage(image: image)
+        output.getImages(with: self)
+        self.imageTableView.deleteRows(at: [indexPath], with: .automatic)
         }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -88,11 +88,5 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
 
 @available(iOS 13.0, *)
 extension LikeImageViewController: NSFetchedResultsControllerDelegate {
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.imageTableView.endUpdates()
-    }
     
-    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.imageTableView.beginUpdates()
-        }
 }

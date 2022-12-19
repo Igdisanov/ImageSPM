@@ -6,8 +6,10 @@
 //
 
 import DataKit
+import CoreData
 
 protocol LikeImageViewOutput: AnyObject {
     func viewDidLoad()
     func deleteImage(image: ImageInfo)
+    func getImages(with: NSFetchedResultsControllerDelegate)
 }

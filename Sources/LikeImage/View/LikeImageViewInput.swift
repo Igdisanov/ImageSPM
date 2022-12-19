@@ -7,6 +7,8 @@
 
 import DataKit
 
+@available(iOS 13.0, *)
 protocol LikeImageViewInput: AnyObject {
     func viewDidLoad()
+    func setupInitialState(provider: EmployeeProvider?)
 }
