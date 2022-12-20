@@ -16,7 +16,7 @@ public class DetailInfoViewController: UIViewController {
     
     private var image: ImageDataInfo?
     private var isTapped = false
-    private var frameUserImageView = CGRect()
+    private var frameUserImageView: CGRect!
     
     private var contentView: UIView = {
         let contentView = UIView()
@@ -54,7 +54,7 @@ public class DetailInfoViewController: UIViewController {
     
     private func setupUI(image: ImageDataInfo?) {
         guard
-            let image = self.image,
+            let image = image,
             let imageUrl = image.urls?["regular"],
             let url = URL(string: imageUrl)
         else {return}
@@ -87,9 +87,9 @@ public class DetailInfoViewController: UIViewController {
         
     }
     
-    private func setupContentImageView(image: ImageDataInfo) {
+    private func setupContentImageView(image: ImageDataInfo?) {
         guard
-            let image = self.image,
+            let image = image,
             let imageUrl = image.urls?["regular"],
             let url = URL(string: imageUrl)
         else {return}
@@ -102,12 +102,16 @@ public class DetailInfoViewController: UIViewController {
         contentImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         contentImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         contentImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedContentImage))
+        contentImageView.addGestureRecognizer(tap)
+        contentImageView.isUserInteractionEnabled = true
     }
     
     private func setupUserImageView(image: ImageDataInfo) {
         guard
             let image = self.image,
-            let imageUrl = image.user?.profile_image?["medium"],
+            let imageUrl = image.user?.profile_image?["large"],
             let url = URL(string: imageUrl)
         else {return}
         userImageView.kf.setImage(with: url)
@@ -124,7 +128,7 @@ public class DetailInfoViewController: UIViewController {
         let height = CGFloat(image.height ?? 100) * widht / CGFloat(image.width ?? 100)
         userImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedMe))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUserImage))
         userImageView.addGestureRecognizer(tap)
         userImageView.isUserInteractionEnabled = true
     }
@@ -136,26 +140,50 @@ public class DetailInfoViewController: UIViewController {
         likeLabel.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
     }
     
-    @objc func tappedMe(){
+    @objc func tappedUserImage(){
         UIView.animate(withDuration: 1.0, animations: {
             if !self.isTapped {
                 self.isTapped = true
+                self.frameUserImageView = CGRect()
                 self.frameUserImageView = self.userImageView.frame
                 let scaleX = self.userImageView.frame.width / self.contentImageView.frame.width * 30
                 let scaleY = self.userImageView.frame.height / self.contentImageView.frame.height * 30
                 self.userImageView.center = self.view.center
                 self.userImageView.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
                 self.contentImageView.alpha = 0.0
-            } else {
+                self.userImageView.alpha = 0.0
+            }
+        }) { _ in
+            guard
+                let image = self.image,
+                let imageUrl = image.user?.profile_image?["large"],
+                let url = URL(string: imageUrl)
+            else {return}
+            self.contentImageView.alpha = 1.0
+            self.contentImageView.kf.setImage(with: url)
+            self.likeLabel.text = image.user?.name
+        }
+    }
+    
+    @objc func tappedContentImage(){
+        UIView.animate(withDuration: 1.0, animations: {
+            if self.isTapped {
+                guard
+                    let image = self.image,
+                    let imageUrl = image.urls?["regular"],
+                    let url = URL(string: imageUrl)
+                else {return}
+                self.contentImageView.alpha = 1.0
+                self.contentImageView.kf.setImage(with: url)
+                self.likeLabel.text = "♥️ \(image.likes ?? 0)"
                 self.isTapped = false
                 self.userImageView.frame = self.frameUserImageView
                 self.userImageView.transform = .identity
                 self.contentImageView.transform = .identity
                 self.contentImageView.alpha = 1.0
+                self.userImageView.alpha = 1.0
             }
-        }) { _ in
-//            self.likeLabel.text = "Vadim"
-        }
+        }) 
     }
     
 }

@@ -92,7 +92,7 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
                                       height: Int(image.height),
                                       width: Int(image.width),
                                       likes: Int(image.likes),
-                                      user: UserIinfo(name: image.name ?? "", profileImage: ["medium" : image.medium ?? ""]))
+                                      user: UserIinfo(name: image.name ?? "", profileImage: ["large" : image.medium ?? ""]))
 
         output.openDetailInfo(vc: self, image: imageData)
     }

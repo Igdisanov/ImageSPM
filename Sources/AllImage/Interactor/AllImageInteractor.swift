@@ -75,7 +75,7 @@ extension AllImageInteractor {
         photoObject.id = photo.id
         photoObject.color = photo.color
         photoObject.name = photo.user?.name
-        photoObject.medium = photo.user?.profile_image?["medium"]
+        photoObject.medium = photo.user?.profile_image?["large"]
         
         
         do {
