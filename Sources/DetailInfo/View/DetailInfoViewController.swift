@@ -15,6 +15,8 @@ public class DetailInfoViewController: UIViewController {
     var output: DetailInfoViewOutput!
     
     private var image: ImageDataInfo?
+    private var isTapped = false
+    private var frameUserImageView = CGRect()
     
     private var contentView: UIView = {
         let contentView = UIView()
@@ -121,6 +123,10 @@ public class DetailInfoViewController: UIViewController {
         
         let height = CGFloat(image.height ?? 100) * widht / CGFloat(image.width ?? 100)
         userImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedMe))
+        userImageView.addGestureRecognizer(tap)
+        userImageView.isUserInteractionEnabled = true
     }
     
     private func setupLikeLabel(image: ImageDataInfo) {
@@ -128,6 +134,28 @@ public class DetailInfoViewController: UIViewController {
         likeLabel.text = "♥️ \(image.likes ?? 0)"
         likeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         likeLabel.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
+    }
+    
+    @objc func tappedMe(){
+        UIView.animate(withDuration: 1.0, animations: {
+            if !self.isTapped {
+                self.isTapped = true
+                self.frameUserImageView = self.userImageView.frame
+                let scaleX = self.userImageView.frame.width / self.contentImageView.frame.width * 30
+                let scaleY = self.userImageView.frame.height / self.contentImageView.frame.height * 30
+                self.userImageView.center = self.view.center
+                self.userImageView.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                self.contentImageView.alpha = 0.0
+            } else {
+                self.isTapped = false
+                self.userImageView.frame = self.frameUserImageView
+                self.userImageView.transform = .identity
+                self.contentImageView.transform = .identity
+                self.contentImageView.alpha = 1.0
+            }
+        }) { _ in
+//            self.likeLabel.text = "Vadim"
+        }
     }
     
 }
