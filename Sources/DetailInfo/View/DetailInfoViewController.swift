@@ -141,7 +141,7 @@ public class DetailInfoViewController: UIViewController {
     }
     
     @objc func tappedUserImage(){
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             if !self.isTapped {
                 self.isTapped = true
                 self.frameUserImageView = CGRect()
@@ -166,7 +166,7 @@ public class DetailInfoViewController: UIViewController {
     }
     
     @objc func tappedContentImage(){
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             if self.isTapped {
                 guard
                     let image = self.image,
