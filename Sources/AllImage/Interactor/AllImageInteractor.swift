@@ -74,6 +74,8 @@ extension AllImageInteractor {
         photoObject.small = photo.urls?["small"]
         photoObject.id = photo.id
         photoObject.color = photo.color
+        photoObject.name = photo.user?.name
+        photoObject.medium = photo.user?.profile_image?["medium"]
         
         
         do {

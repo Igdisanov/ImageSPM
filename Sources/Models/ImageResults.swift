@@ -19,15 +19,16 @@ public class ImageDataInfo: Decodable {
     public let color: String?
     public let likes: Int?
     public let urls: [URLKing.RawValue:String]?
+    public let user: UserIinfo?
     
-    
-    public init(id: String, color: String, urls: [URLKing.RawValue:String], height: Int, width: Int, likes: Int ) {
+    public init(id: String, color: String, urls: [URLKing.RawValue:String], height: Int, width: Int, likes: Int, user: UserIinfo) {
         self.id = id
         self.color = color
         self.urls = urls
         self.height = height
         self.width = width
         self.likes = likes
+        self.user = user
     }
     
     public enum URLKing: String {
@@ -37,4 +38,22 @@ public class ImageDataInfo: Decodable {
         case small
         case thumb
     }
+    
+}
+
+public class UserIinfo: Decodable {
+    public let name: String?
+    public let profile_image: [ProfileImageSize.RawValue:String]?
+    
+    public init(name: String, profileImage: [ProfileImageSize.RawValue:String]) {
+        self.name = name
+        self.profile_image = profileImage
+    }
+    
+    public enum ProfileImageSize: String, Codable {
+        case small
+        case medium
+        case large
+    }
+    
 }

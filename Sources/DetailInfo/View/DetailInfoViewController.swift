@@ -37,6 +37,13 @@ public class DetailInfoViewController: UIViewController {
         return imageView
     }()
     
+    private var userImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .red
+        return imageView
+    }()
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -54,9 +61,12 @@ public class DetailInfoViewController: UIViewController {
         setupContentView(image: image)
         setupContentImageView(image: image)
         setupLikeLabel(image: image)
+        setupUserImageView(image: image)
     }
     
     private func setupContentView(image: ImageDataInfo) {
+        
+        
         self.view.addSubview(contentView)
         
         contentView.backgroundColor = UIColor(hexString: image.color ?? "#FFFFFF")
@@ -76,6 +86,13 @@ public class DetailInfoViewController: UIViewController {
     }
     
     private func setupContentImageView(image: ImageDataInfo) {
+        guard
+            let image = self.image,
+            let imageUrl = image.urls?["regular"],
+            let url = URL(string: imageUrl)
+        else {return}
+        contentImageView.kf.setImage(with: url)
+        
         self.view.addSubview(contentImageView)
         contentImageView.layer.cornerRadius = 8
         contentImageView.clipsToBounds = true
@@ -83,6 +100,27 @@ public class DetailInfoViewController: UIViewController {
         contentImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         contentImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         contentImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+    }
+    
+    private func setupUserImageView(image: ImageDataInfo) {
+        guard
+            let image = self.image,
+            let imageUrl = image.user?.profile_image?["medium"],
+            let url = URL(string: imageUrl)
+        else {return}
+        userImageView.kf.setImage(with: url)
+        
+        self.view.addSubview(userImageView)
+        userImageView.layer.cornerRadius = 8
+        userImageView.clipsToBounds = true
+        userImageView.bottomAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -16).isActive = true
+        userImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
+        
+        let widht = self.view.frame.width / 7
+        userImageView.widthAnchor.constraint(equalToConstant: widht).isActive = true
+        
+        let height = CGFloat(image.height ?? 100) * widht / CGFloat(image.width ?? 100)
+        userImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
     private func setupLikeLabel(image: ImageDataInfo) {

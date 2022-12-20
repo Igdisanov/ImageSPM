@@ -20,6 +20,8 @@ extension ImageInfo {
     @NSManaged public var height: Int32
     @NSManaged public var id: String?
     @NSManaged public var likes: Int32
+    @NSManaged public var medium: String?
+    @NSManaged public var name: String?
     @NSManaged public var regular: String?
     @NSManaged public var small: String?
     @NSManaged public var width: Int32

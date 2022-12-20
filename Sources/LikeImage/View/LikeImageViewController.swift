@@ -85,12 +85,15 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let image = provider?.fetchedResultController.object(at: indexPath) else {return}
+        
         let imageData = ImageDataInfo(id: image.id ?? "",
                                       color: image.color ?? "#FFFFFF",
                                       urls: ["regular" : image.regular ?? ""],
                                       height: Int(image.height),
                                       width: Int(image.width),
-                                      likes: Int(image.likes))
+                                      likes: Int(image.likes),
+                                      user: UserIinfo(name: image.name ?? "", profileImage: ["medium" : image.medium ?? ""]))
+
         output.openDetailInfo(vc: self, image: imageData)
     }
 }

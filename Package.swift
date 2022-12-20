@@ -29,7 +29,7 @@ let package = Package(
             dependencies: ["DataKit", "Kingfisher"]),
         .target(
             name: "DetailInfo",
-            dependencies: ["Kingfisher"]),
+            dependencies: ["Models", "Kingfisher", "NetworkService", "DataKit"]),
         .target(
             name: "NetworkService",
             dependencies: ["Models"]),
