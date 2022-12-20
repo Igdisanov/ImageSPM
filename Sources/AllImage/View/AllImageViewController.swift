@@ -28,7 +28,8 @@ public class AllImageViewController: UIViewController {
     }()
     
     private lazy var infoBarButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .trash,
+        return UIBarButtonItem(title: "info",
+                               style: UIBarButtonItem.Style.plain,
                                target: self,
                                action: #selector(infoBarButtonTapped))
     }()
@@ -98,14 +99,7 @@ public class AllImageViewController: UIViewController {
     }
     
     @objc private func infoBarButtonTapped(){
-//        var image = ImageInfo()
         guard let selectedImage = selectedImeges.first else {return}
-//        image.id = selectedImage?.id
-//        image.regular = selectedImage?.urls["regular"]
-//        image.small = selectedImage?.urls["small"]
-//        image.likes = Int32(selectedImage?.likes ?? 0)
-//        image.width = Int32(selectedImage?.width ?? 100)
-//        image.height = Int32(selectedImage?.height ?? 100)
         output.openDetailInfo(vc: self, image: selectedImage)
     }
     
