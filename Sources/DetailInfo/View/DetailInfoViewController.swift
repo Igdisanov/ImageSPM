@@ -27,7 +27,6 @@ public class DetailInfoViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
-        label.text = "♥️ - 100"
         return label
     }()
     
@@ -54,7 +53,7 @@ public class DetailInfoViewController: UIViewController {
         contentImageView.kf.setImage(with: url)
         setupContentView(image: image)
         setupContentImageView(image: image)
-        setupLikeLabel()
+        setupLikeLabel(image: image)
     }
     
     private func setupContentView(image: ImageDataInfo) {
@@ -86,8 +85,9 @@ public class DetailInfoViewController: UIViewController {
         contentImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
     }
     
-    private func setupLikeLabel() {
+    private func setupLikeLabel(image: ImageDataInfo) {
         self.view.addSubview(likeLabel)
+        likeLabel.text = "♥️ \(image.likes ?? 0)"
         likeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         likeLabel.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
     }
