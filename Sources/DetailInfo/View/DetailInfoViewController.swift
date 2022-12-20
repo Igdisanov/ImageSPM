@@ -61,12 +61,13 @@ public class DetailInfoViewController: UIViewController {
         self.view.addSubview(contentView)
         
         contentView.backgroundColor = UIColor(hexString: image.color ?? "#FFFFFF")
+        contentView.alpha = 0.5
         contentView.layer.cornerRadius = 15
         
         contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
         contentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         
-        let widht = self.view.frame.width - 220
+        let widht = self.view.frame.width - 64
         contentView.widthAnchor.constraint(equalToConstant: widht).isActive = true
         
         let height = CGFloat(image.height ?? 100) * widht / CGFloat(image.width ?? 100)
@@ -76,7 +77,7 @@ public class DetailInfoViewController: UIViewController {
     }
     
     private func setupContentImageView(image: ImageDataInfo) {
-        self.contentView.addSubview(contentImageView)
+        self.view.addSubview(contentImageView)
         contentImageView.layer.cornerRadius = 8
         contentImageView.clipsToBounds = true
         contentImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true

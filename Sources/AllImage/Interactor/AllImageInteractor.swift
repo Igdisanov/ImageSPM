@@ -73,6 +73,7 @@ extension AllImageInteractor {
         photoObject.regular = photo.urls?["regular"]
         photoObject.small = photo.urls?["small"]
         photoObject.id = photo.id
+        photoObject.color = photo.color
         
         
         do {
