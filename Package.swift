@@ -11,25 +11,17 @@ let package = Package(
     products: [
         .library(
             name: "ImageSPM",
-            targets: ["TabBarController", "AllImage", "LikeImage", "DetailInfo", "NetworkService", "Models", "DataKit", "Extansions"]),
+            targets: ["Modules", "NetworkService", "Models", "DataKit", "Extansions"]),
     ],
     dependencies: [.package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.4.1"))
                   ],
     targets: [
         
+        
         .target(
-            name: "TabBarController",
-            dependencies: ["AllImage"]),
-        .target(
-            name: "AllImage",
-            dependencies: ["Models", "Kingfisher", "NetworkService", "DataKit", "DetailInfo"],
+            name: "Modules",
+            dependencies: ["Models", "Kingfisher", "NetworkService", "DataKit"],
             resources: [.process("Media.xcassets")]),
-        .target(
-            name: "LikeImage",
-            dependencies: ["DataKit", "Kingfisher"]),
-        .target(
-            name: "DetailInfo",
-            dependencies: ["Models", "Kingfisher", "NetworkService", "DataKit"]),
         .target(
             name: "NetworkService",
             dependencies: ["Models"]),
