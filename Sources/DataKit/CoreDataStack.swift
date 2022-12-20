@@ -10,6 +10,7 @@ import CoreData
 
 @available(iOS 13.0, *)
 open class CoreDataStack: NSObject {
+    
     public lazy var persistentContainer: NSPersistentContainer = {
         
         let bundle = Bundle.module

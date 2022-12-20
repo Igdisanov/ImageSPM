@@ -29,11 +29,15 @@ class ImageTableCell: UITableViewCell {
         return imageView
     }()
     
+    // MARK: - Deinitializers
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         castomImageView.image = nil
         likeLabel.text = nil
     }
+    
+    // MARK: - Setup UI
     
     func setupUICell(image: ImageInfo?) {
         guard let imageUrl = image?.regular, let url = URL(string: imageUrl), let likes = image?.likes else {return}

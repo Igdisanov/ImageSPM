@@ -20,7 +20,7 @@ class LikeImagePresenter: LikeImageInteractorOutput {
     private var provider: EmployeeProvider?
 }
 
-     //MARK:LikeImageViewOutput
+     //MARK: - LikeImageViewOutput
 
 @available(iOS 13.0, *)
 extension LikeImagePresenter: LikeImageViewOutput {
@@ -42,7 +42,7 @@ extension LikeImagePresenter: LikeImageViewOutput {
     }
 }
 
-     //MARK: LikeImageModuleInput
+     //MARK: - LikeImageModuleInput
 
 @available(iOS 13.0, *)
 extension LikeImagePresenter: LikeImageModuleInput {

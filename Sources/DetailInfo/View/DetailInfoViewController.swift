@@ -12,11 +12,7 @@ import Kingfisher
 
 public class DetailInfoViewController: UIViewController {
     
-    var output: DetailInfoViewOutput!
-    
-    private var image: ImageDataInfo?
-    private var isTapped = false
-    private var frameUserImageView: CGRect!
+    // MARK: - Visual Components
     
     private var contentView: UIView = {
         let contentView = UIView()
@@ -46,34 +42,42 @@ public class DetailInfoViewController: UIViewController {
         return imageView
     }()
     
+    // MARK: - Public Properties
+    
+    var output: DetailInfoViewOutput!
+    
+    // MARK: - Private Properties
+    
+    private var image: ImageDataInfo?
+    private var isTapped = false
+    private var frameUserImageView: CGRect!
+    
+    // MARK: - Initializers
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI(image: image)
     }
     
+    // MARK: - Setup UI
+    
     private func setupUI(image: ImageDataInfo?) {
-        guard
-            let image = image,
-            let imageUrl = image.urls?["regular"],
-            let url = URL(string: imageUrl)
-        else {return}
         
-        contentImageView.kf.setImage(with: url)
-        setupContentView(image: image)
-        setupContentImageView(image: image)
-        setupLikeLabel(image: image)
-        setupUserImageView(image: image)
+        setupContentView()
+        setupContentImageView()
+        setupLikeLabel()
+        setupUserImageView()
     }
     
-    private func setupContentView(image: ImageDataInfo) {
-        
+    private func setupContentView() {
+        guard let image = self.image else {return}
         
         self.view.addSubview(contentView)
         
-        contentView.backgroundColor = UIColor(hexString: image.color ?? "#FFFFFF")
         contentView.alpha = 0.5
         contentView.layer.cornerRadius = 15
+        contentView.backgroundColor = UIColor(hexString: image.color ?? "#FFFFFF")
         
         contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
         contentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
@@ -87,17 +91,16 @@ public class DetailInfoViewController: UIViewController {
         
     }
     
-    private func setupContentImageView(image: ImageDataInfo?) {
-        guard
-            let image = image,
-            let imageUrl = image.urls?["regular"],
-            let url = URL(string: imageUrl)
-        else {return}
-        contentImageView.kf.setImage(with: url)
+    private func setupContentImageView() {
+        guard let image = self.image else {return}
+        
+        kingFisherImage(imageView: contentImageView, image: image, imageUrl: image.urls?["regular"])
         
         self.view.addSubview(contentImageView)
+        
         contentImageView.layer.cornerRadius = 8
         contentImageView.clipsToBounds = true
+        
         contentImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         contentImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         contentImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
@@ -108,17 +111,16 @@ public class DetailInfoViewController: UIViewController {
         contentImageView.isUserInteractionEnabled = true
     }
     
-    private func setupUserImageView(image: ImageDataInfo) {
-        guard
-            let image = self.image,
-            let imageUrl = image.user?.profile_image?["large"],
-            let url = URL(string: imageUrl)
-        else {return}
-        userImageView.kf.setImage(with: url)
+    private func setupUserImageView() {
+        guard let image = self.image else {return}
+        
+        kingFisherImage(imageView: userImageView, image: image, imageUrl: image.user?.profile_image?["large"])
         
         self.view.addSubview(userImageView)
+        
         userImageView.layer.cornerRadius = 8
         userImageView.clipsToBounds = true
+        
         userImageView.bottomAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -16).isActive = true
         userImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
         
@@ -133,12 +135,27 @@ public class DetailInfoViewController: UIViewController {
         userImageView.isUserInteractionEnabled = true
     }
     
-    private func setupLikeLabel(image: ImageDataInfo) {
+    private func setupLikeLabel() {
+        guard let image = self.image else {return}
+        
         self.view.addSubview(likeLabel)
+        
         likeLabel.text = "♥️ \(image.likes ?? 0)"
         likeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         likeLabel.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
     }
+    
+    // MARK: - Private Methods
+    
+    private func kingFisherImage(imageView: UIImageView,image: ImageDataInfo, imageUrl: String? ) {
+        guard
+            let imageUrl = imageUrl,
+            let url = URL(string: imageUrl)
+        else {return}
+        imageView.kf.setImage(with: url)
+    }
+    
+    // MARK: - Action Methods
     
     @objc func tappedUserImage(){
         UIView.animate(withDuration: 0.5, animations: {
@@ -154,13 +171,9 @@ public class DetailInfoViewController: UIViewController {
                 self.userImageView.alpha = 0.0
             }
         }) { _ in
-            guard
-                let image = self.image,
-                let imageUrl = image.user?.profile_image?["large"],
-                let url = URL(string: imageUrl)
-            else {return}
+            guard let image = self.image else {return}
+            self.kingFisherImage(imageView: self.contentImageView, image: image, imageUrl: image.user?.profile_image?["large"])
             self.contentImageView.alpha = 1.0
-            self.contentImageView.kf.setImage(with: url)
             self.likeLabel.text = image.user?.name
         }
     }
@@ -168,13 +181,9 @@ public class DetailInfoViewController: UIViewController {
     @objc func tappedContentImage(){
         UIView.animate(withDuration: 0.5, animations: {
             if self.isTapped {
-                guard
-                    let image = self.image,
-                    let imageUrl = image.urls?["regular"],
-                    let url = URL(string: imageUrl)
-                else {return}
+                guard let image = self.image else {return}
+                self.kingFisherImage(imageView: self.contentImageView, image: image, imageUrl: image.urls?["regular"])
                 self.contentImageView.alpha = 1.0
-                self.contentImageView.kf.setImage(with: url)
                 self.likeLabel.text = "♥️ \(image.likes ?? 0)"
                 self.isTapped = false
                 self.userImageView.frame = self.frameUserImageView
@@ -183,7 +192,7 @@ public class DetailInfoViewController: UIViewController {
                 self.contentImageView.alpha = 1.0
                 self.userImageView.alpha = 1.0
             }
-        }) 
+        })
     }
     
 }

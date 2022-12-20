@@ -11,8 +11,7 @@ import UIKit
 open class AllImageConfigurator {
     
     public static func configure(output: Any? = nil) -> AllImageViewController {
-//        let bundle = Bundle(for: AllImageViewController.self)
-//        let viewController = AllImageViewController(nibName: String(describing: AllImageViewController.self), bundle: bundle)
+        
         let viewController = AllImageViewController()
         
         let router = AllImageRouter()

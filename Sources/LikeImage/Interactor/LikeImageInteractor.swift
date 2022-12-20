@@ -16,7 +16,7 @@ class LikeImageInteractor {
     var savedPhotos: [ImageInfo] = []
 }
 
-     //MARK: LikeImageInteractorInput
+//MARK: LikeImageInteractorInput
 
 @available(iOS 13.0, *)
 extension LikeImageInteractor: LikeImageInteractorInput {
@@ -51,7 +51,7 @@ extension LikeImageInteractor {
         if let objects = try? context.fetch(fetchRequest) {
             for object in objects {
                 if object.id == photo.id {
-                context.delete(object)
+                    context.delete(object)
                 }
             }
         }

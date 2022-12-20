@@ -14,10 +14,17 @@ import Kingfisher
 @available(iOS 13.0, *)
 public class LikeImageViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
     var output: LikeImageViewOutput!
-    let imageTableView = UITableView()
+    
+    // MARK: - Private Properties
+    
+    private let imageTableView = UITableView()
     private var savedImages = [ImageInfo]()
     private var provider: EmployeeProvider?
+    
+    // MARK: - Initializers
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +37,11 @@ public class LikeImageViewController: UIViewController {
         self.imageTableView.reloadData()
     }
     
+    // MARK: - Setup UI
+    
     private func setupTableView() {
         view.addSubview(imageTableView)
+        
         imageTableView.dataSource = self
         imageTableView.delegate = self
         
@@ -77,7 +87,7 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
         output.deleteImage(image: image)
         output.getImages(with: self)
         self.imageTableView.deleteRows(at: [indexPath], with: .automatic)
-        }
+    }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
@@ -93,7 +103,7 @@ extension LikeImageViewController: UITableViewDelegate, UITableViewDataSource {
                                       width: Int(image.width),
                                       likes: Int(image.likes),
                                       user: UserIinfo(name: image.name ?? "", profileImage: ["large" : image.medium ?? ""]))
-
+        
         output.openDetailInfo(vc: self, image: imageData)
     }
 }
