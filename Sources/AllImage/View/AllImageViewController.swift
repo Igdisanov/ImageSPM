@@ -214,7 +214,7 @@ extension AllImageViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widhtPerItem = availableWidth / itemsPerRow
-        let height = CGFloat(image.height) * widhtPerItem / CGFloat(image.width)
+        let height = CGFloat(image.height ?? 100) * widhtPerItem / CGFloat(image.width ?? 100)
         return CGSize(width: widhtPerItem, height: height)
     }
     

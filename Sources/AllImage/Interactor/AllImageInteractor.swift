@@ -67,11 +67,11 @@ extension AllImageInteractor {
         let context = getContext()
         guard let entity = NSEntityDescription.entity(forEntityName: "ImageInfo", in: context) else {return}
         let photoObject = ImageInfo(entity: entity, insertInto: context)
-        photoObject.likes = Int32(photo.likes)
-        photoObject.height = Int32(photo.height)
-        photoObject.width = Int32(photo.width)
-        photoObject.regular = photo.urls["regular"]
-        photoObject.small = photo.urls["small"]
+        photoObject.likes = Int32(photo.likes ?? 0)
+        photoObject.height = Int32(photo.height ?? 100)
+        photoObject.width = Int32(photo.width ?? 100)
+        photoObject.regular = photo.urls?["regular"]
+        photoObject.small = photo.urls?["small"]
         photoObject.id = photo.id
         
         

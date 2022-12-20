@@ -47,7 +47,7 @@ public class DetailInfoViewController: UIViewController {
     private func setupUI(image: ImageDataInfo?) {
         guard
             let image = self.image,
-            let imageUrl = image.urls["regular"],
+            let imageUrl = image.urls?["regular"],
             let url = URL(string: imageUrl)
         else {return}
         
@@ -60,7 +60,7 @@ public class DetailInfoViewController: UIViewController {
     private func setupContentView(image: ImageDataInfo) {
         self.view.addSubview(contentView)
         
-        contentView.backgroundColor = UIColor(hexString: image.color)
+        contentView.backgroundColor = UIColor(hexString: image.color ?? "#FFFFFF")
         contentView.layer.cornerRadius = 15
         
         contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
@@ -69,7 +69,7 @@ public class DetailInfoViewController: UIViewController {
         let widht = self.view.frame.width - 220
         contentView.widthAnchor.constraint(equalToConstant: widht).isActive = true
         
-        let height = CGFloat(image.height) * widht / CGFloat(image.width)
+        let height = CGFloat(image.height ?? 100) * widht / CGFloat(image.width ?? 100)
         contentView.heightAnchor.constraint(equalToConstant: height).isActive = true
         
         

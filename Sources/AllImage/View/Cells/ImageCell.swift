@@ -15,7 +15,7 @@ class ImageCell: UICollectionViewCell {
     
     var image: ImageDataInfo! {
         didSet {
-            let imageUrl = image.urls["regular"]
+            let imageUrl = image.urls?["regular"]
             guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {return}
             imageView.kf.setImage(with: url)
         }

@@ -7,6 +7,8 @@
 
 import DataKit
 import CoreData
+import Models
+import UIKit
 
 @available(iOS 13.0, *)
 class LikeImagePresenter: LikeImageInteractorOutput {
@@ -30,6 +32,10 @@ extension LikeImagePresenter: LikeImageViewOutput {
     
     func deleteImage(image: ImageInfo) {
         self.interactor.deleteImage(image: image)
+    }
+    
+    func openDetailInfo(vc: UIViewController, image: ImageDataInfo){
+        router.pushDetailVC(vc: vc, image: image)
     }
     
     func viewDidLoad() {
