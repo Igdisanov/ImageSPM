@@ -16,6 +16,7 @@ extension ImageInfo {
         return NSFetchRequest<ImageInfo>(entityName: "ImageInfo")
     }
 
+    @NSManaged public var color: String?
     @NSManaged public var height: Int32
     @NSManaged public var id: String?
     @NSManaged public var likes: Int32

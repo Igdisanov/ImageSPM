@@ -6,6 +6,8 @@
 //
 
 import Models
+import UIKit
+import DataKit
 
 class AllImagePresenter: AllImageInteractorOutput {
     
@@ -46,6 +48,10 @@ extension AllImagePresenter: AllImageViewOutput {
     
     func getPhotos() {
         interactor.getPhotos()
+    }
+    
+    func openDetailInfo(vc: UIViewController, image: ImageDataInfo){
+        router.pushDetailVC(vc: vc, image: image)
     }
 }
 

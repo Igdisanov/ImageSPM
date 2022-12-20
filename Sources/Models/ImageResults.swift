@@ -16,6 +16,7 @@ public struct ImageDataInfo: Decodable {
     public let id: String
     public let width: Int
     public let height: Int
+    public let color: String
     public let likes: Int
     public let urls: [URLKing.RawValue:String]
     

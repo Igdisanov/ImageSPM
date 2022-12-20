@@ -6,10 +6,13 @@
 //
 
 import Models
+import UIKit
+import DataKit
 
 protocol AllImageViewOutput: AnyObject {
     func viewDidLoad()
     func requestImage(searchTerm: String?)
     func savePhotos(photos: [ImageDataInfo])
     func getPhotos()
+    func openDetailInfo(vc: UIViewController, image: ImageDataInfo)
 }

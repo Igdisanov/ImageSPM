@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import DataKit
+import Models
 
 open class DetailInfoConfigurator {
     
-    public static func configure(output: Any? = nil) -> DetailInfoViewController {
+    public static func configure(output: Any? = nil, image: ImageDataInfo) -> DetailInfoViewController {
         
         let viewController = DetailInfoViewController()
         
@@ -20,6 +22,7 @@ open class DetailInfoConfigurator {
         presenter.view = viewController
         presenter.router = router
         presenter.output = output as? DetailInfoModuleOutput
+        presenter.image = image
         
         let interactor = DetailInfoInteractor()
         interactor.output = presenter

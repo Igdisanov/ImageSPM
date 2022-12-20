@@ -5,6 +5,9 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
+import DataKit
+import Models
+
 class DetailInfoPresenter: DetailInfoInteractorOutput {
     
     weak var view: DetailInfoViewInput!
@@ -12,6 +15,11 @@ class DetailInfoPresenter: DetailInfoInteractorOutput {
     var router: DetailInfoRouterInput!
     var output: DetailInfoModuleOutput?
     
+    var image: ImageDataInfo! {
+        didSet{
+            view.setupInitialState(image: image)
+        }
+    }
 }
 
      //MARK:DetailInfoViewOutput
