@@ -50,6 +50,7 @@ public class AllImageViewController: UIViewController {
     private var timer: Timer?
     private var images = [ImageDataInfo]()
     private var selectedImeges = [ImageDataInfo]()
+    private var shareImage = [UIImage]()
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     private var numberOfSelectedPhotos: Int {
@@ -104,7 +105,7 @@ public class AllImageViewController: UIViewController {
     }
     
     @objc private func actionBarButtonTapped(sender: UIBarButtonItem){
-        let shareController = UIActivityViewController(activityItems: selectedImeges,
+        let shareController = UIActivityViewController(activityItems: shareImage,
                                                        applicationActivities: nil)
         
         shareController.completionWithItemsHandler = { _, bool, _, _ in
@@ -180,8 +181,10 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         updateNavButtonsState()
         let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
-        guard let image = cell.image else {return}
+        guard let image = cell.image, let imageForShare = cell.imageView.image else {return}
         selectedImeges.append(image)
+        shareImage.append(imageForShare)
+        
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -191,6 +194,7 @@ extension AllImageViewController: UICollectionViewDataSource, UICollectionViewDe
         for (i, value) in selectedImeges.enumerated() {
             if image.id == value.id {
                 selectedImeges.remove(at: i)
+                shareImage.remove(at: i)
             }
         }
     }
