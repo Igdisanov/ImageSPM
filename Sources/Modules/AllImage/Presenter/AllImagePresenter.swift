@@ -36,9 +36,9 @@ extension AllImagePresenter: AllImageViewOutput {
     }
     
     func requestImage(searchTerm: String? = nil) {
-        interactor.fetchImages(searchTerm: searchTerm) { (images) in
+        interactor.fetchImages(searchTerm: searchTerm) { [weak self] (images) in
             guard let images = images else {return}
-            self.images = images
+            self?.images = images
         }
     }
     

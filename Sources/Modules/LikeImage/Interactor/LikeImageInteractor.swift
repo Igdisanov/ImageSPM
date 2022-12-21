@@ -13,7 +13,6 @@ import DataKit
 class LikeImageInteractor {
     
     weak var output: LikeImageInteractorOutput!
-    var savedPhotos: [ImageInfo] = []
 }
 
 //MARK: LikeImageInteractorInput
