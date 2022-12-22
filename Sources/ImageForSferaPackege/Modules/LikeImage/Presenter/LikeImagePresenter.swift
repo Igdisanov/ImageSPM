@@ -17,6 +17,12 @@ class LikeImagePresenter: LikeImageInteractorOutput {
     var router: LikeImageRouterInput!
     var output: LikeImageModuleOutput?
     private var provider: EmployeeProvider?
+    
+    init(interactor: LikeImageInteractorInput!, router: LikeImageRouterInput!, output: LikeImageModuleOutput? = nil) {
+        self.interactor = interactor
+        self.router = router
+        self.output = output
+    }
 }
 
      //MARK: - LikeImageViewOutput

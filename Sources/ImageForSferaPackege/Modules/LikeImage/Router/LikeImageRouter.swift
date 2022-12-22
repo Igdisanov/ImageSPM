@@ -11,8 +11,6 @@ import UIKit
 @available(iOS 13.0, *)
 class LikeImageRouter: LikeImageRouterInput {
     
-    weak var view: LikeImageViewInput?
-    
     func pushDetailVC(vc: UIViewController, image: ImageDataInfo) {
         let detailVC = DetailInfoConfigurator.configure(image: image)
         vc.navigationController?.pushViewController(detailVC, animated: true)

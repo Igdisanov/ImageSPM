@@ -8,26 +8,19 @@
 import UIKit
 
 @available(iOS 13.0, *)
-open class LikeImageConfigurator {
+class LikeImageConfigurator {
     
-    public static func configure(output: Any? = nil) -> LikeImageViewController {
+    static func configure(output: Any? = nil) -> LikeImageViewController {
         
         let viewController = LikeImageViewController()
-        
         let router = LikeImageRouter()
-        router.view = viewController
-        
-        let presenter = LikeImagePresenter()
-        presenter.view = viewController
-        presenter.router = router
-        presenter.output = output as? LikeImageModuleOutput
-        
         let interactor = LikeImageInteractor()
+        let presenter = LikeImagePresenter(interactor: interactor,
+                                           router: router,
+                                           output: output as? LikeImageModuleOutput)
+        presenter.view = viewController
         interactor.output = presenter
-        
-        presenter.interactor = interactor
         viewController.output = presenter
-        
         return viewController
     }
 }

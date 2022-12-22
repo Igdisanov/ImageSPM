@@ -24,6 +24,12 @@ class AllImagePresenter: AllImageInteractorOutput {
             self.view.setupInitialState(images: images)
         }
     }
+    
+    init(interactor: AllImageInteractorInput!, router: AllImageRouterInput!, output: AllImageModuleOutput? = nil) {
+        self.interactor = interactor
+        self.router = router
+        self.output = output
+    }
 }
 
      //MARK: - AllImageViewOutput

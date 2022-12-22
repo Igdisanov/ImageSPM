@@ -12,6 +12,12 @@ class TabBarPresenter: TabBarInteractorOutput {
     var router: TabBarRouterInput!
     var output: TabBarModuleOutput?
     
+    init(interactor: TabBarInteractorInput!, router: TabBarRouterInput!, output: TabBarModuleOutput? = nil) {
+        self.interactor = interactor
+        self.router = router
+        self.output = output
+    }
+    
 }
 
      //MARK: TabBarViewOutput

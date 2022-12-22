@@ -7,6 +7,6 @@
 
 class DetailInfoRouter: DetailInfoRouterInput {
     
-    weak var view: DetailInfoViewController?
+    
     
 }

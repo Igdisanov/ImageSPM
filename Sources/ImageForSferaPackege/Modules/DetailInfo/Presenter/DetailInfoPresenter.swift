@@ -19,6 +19,12 @@ class DetailInfoPresenter: DetailInfoInteractorOutput {
             view.setupInitialState(image: image)
         }
     }
+    
+    init( interactor: DetailInfoInteractorInput!, router: DetailInfoRouterInput!, output: DetailInfoModuleOutput? = nil) {
+        self.interactor = interactor
+        self.router = router
+        self.output = output
+    }
 }
 
      //MARK:DetailInfoViewOutput

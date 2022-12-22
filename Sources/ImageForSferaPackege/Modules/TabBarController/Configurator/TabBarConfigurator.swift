@@ -13,21 +13,15 @@ open class TabBarConfigurator {
     public static func configure(output: Any?) -> TabBarController {
         
         let viewController = TabBarController()
-        
         let router = TabBarRouter()
         router.view = viewController
-        
-        let presenter = TabBarPresenter()
-        presenter.view = viewController
-        presenter.router = router
-        presenter.output = output as? TabBarModuleOutput
-        
         let interactor = TabBarInteractor()
+        let presenter = TabBarPresenter(interactor: interactor,
+                                           router: router,
+                                           output: output as? TabBarModuleOutput)
+        presenter.view = viewController
         interactor.output = presenter
-        
-        presenter.interactor = interactor
         viewController.output = presenter
-        
         return viewController
     }
 }

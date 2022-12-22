@@ -7,27 +7,20 @@
 
 import UIKit
 
-open class DetailInfoConfigurator {
+class DetailInfoConfigurator {
     
-    public static func configure(output: Any? = nil, image: ImageDataInfo) -> DetailInfoViewController {
-        
+   static func configure(image: ImageDataInfo, output: Any? = nil) -> DetailInfoViewController {
+       
         let viewController = DetailInfoViewController()
-        
         let router = DetailInfoRouter()
-        router.view = viewController
-        
-        let presenter = DetailInfoPresenter()
-        presenter.view = viewController
-        presenter.router = router
-        presenter.output = output as? DetailInfoModuleOutput
-        presenter.image = image
-        
         let interactor = DetailInfoInteractor()
+        let presenter = DetailInfoPresenter(interactor: interactor,
+                                            router: router,
+                                            output: output as? DetailInfoModuleOutput)
+        presenter.view = viewController
         interactor.output = presenter
-        
-        presenter.interactor = interactor
         viewController.output = presenter 
-        
+        presenter.image = image
         return viewController
     }
 }
