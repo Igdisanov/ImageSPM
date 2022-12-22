@@ -6,12 +6,12 @@ import PackageDescription
 let package = Package(
     name: "ImageSPM",
     platforms: [
-        .iOS(.v12)
+        .iOS(.v13)
     ],
     products: [
         .library(
             name: "ImageSPM",
-            targets: ["Modules", "NetworkService", "Models", "DataKit", "Extansions"]),
+            targets: ["ImageForSferaPackege"]),
     ],
     dependencies: [.package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.4.1"))
                   ],
@@ -19,21 +19,9 @@ let package = Package(
         
         
         .target(
-            name: "Modules",
-            dependencies: ["Models", "Kingfisher", "NetworkService", "DataKit"],
-            resources: [.process("Media.xcassets")]),
-        .target(
-            name: "NetworkService",
-            dependencies: ["Models"]),
-        .target(
-            name: "Models",
-            dependencies: []),
-        .target(
-            name: "DataKit",
-            dependencies: []),
-        .target(
-            name: "Extansions",
-            dependencies: [])
+            name: "ImageForSferaPackege",
+            dependencies: ["Kingfisher"],
+            resources: [.process("Media.xcassets")])
     ]
 )
 
