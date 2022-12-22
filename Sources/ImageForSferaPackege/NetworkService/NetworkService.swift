@@ -7,8 +7,13 @@
 
 import Foundation
 
-class NetworkService {
-    public init() {
+protocol NetworkProtocol {
+    func request(searchTerm: String?, completion: @escaping (Data?, URLResponse?, Error?)-> Void)
+}
+
+final class NetworkService: NetworkProtocol {
+    
+    init() {
         
     }
     func request(searchTerm: String?, completion: @escaping (Data?, URLResponse?, Error?)-> Void) {

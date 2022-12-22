@@ -40,7 +40,6 @@ public class AllImageViewController: UIViewController {
     // MARK: - Public Properties
     
     var output: AllImageViewOutput!
-    var networkDataFetcher = NetworkDataFetcher()
     
     // MARK: - Private Properties
     

@@ -14,7 +14,7 @@ class AllImageInteractor {
     
     // MARK: - Public Properties
     weak var output: AllImageInteractorOutput!
-    var networkDataFetcher = NetworkDataFetcher()
+    var networkDataFetcher: NetworkFetcherProtocol!
     var savedPhotos: [ImageInfo] = []
 }
 

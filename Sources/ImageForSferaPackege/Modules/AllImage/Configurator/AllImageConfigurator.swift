@@ -24,6 +24,7 @@ open class AllImageConfigurator {
         
         let interactor = AllImageInteractor()
         interactor.output = presenter
+        interactor.networkDataFetcher = NetworkDataFetcher()
         
         presenter.interactor = interactor
         viewController.output = presenter

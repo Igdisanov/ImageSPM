@@ -7,10 +7,17 @@
 
 import Foundation
 
-class NetworkDataFetcher {
-    public init(){}
+protocol NetworkFetcherProtocol {
+    func fetchImages(searchTerm: String?, completion: @escaping (Any?) -> ())
+}
+
+final class NetworkDataFetcher: NetworkFetcherProtocol {
     
-    var netwokService = NetworkService()
+    var netwokService: NetworkProtocol!
+    
+    init(){
+        self.netwokService = NetworkService()
+    }
     
     func fetchImages(searchTerm: String?, completion: @escaping (Any?) -> ()) {
         
