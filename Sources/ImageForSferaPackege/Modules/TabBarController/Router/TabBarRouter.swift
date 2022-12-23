@@ -18,7 +18,8 @@ class TabBarRouter: TabBarRouterInput {
                                  title: "All",
                                  image: "rectangle.3.group")
         
-        let likeImageVC = setupVC(view: LikeImageConfigurator.configure(output: nil),
+        let likeImageViewController = LikeImageContainer.assemble(with: LikeImageContext.init())
+        let likeImageVC = setupVC(view: likeImageViewController.viewController,
                                   title: "Like",
                                   image: "suit.heart")
         view?.returnView().viewControllers = [allImageVC, likeImageVC]

@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-public class DetailInfoViewController: UIViewController {
+final class DetailInfoViewController: UIViewController {
     
     // MARK: - Visual Components
     
@@ -42,7 +42,7 @@ public class DetailInfoViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var output: DetailInfoViewOutput!
+    private let output: DetailInfoViewOutput
     
     // MARK: - Private Properties
     
@@ -51,6 +51,16 @@ public class DetailInfoViewController: UIViewController {
     private var frameUserImageView: CGRect!
     
     // MARK: - Initializers
+    
+    init(output: DetailInfoViewOutput) {
+        self.output = output
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()

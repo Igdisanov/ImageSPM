@@ -9,9 +9,9 @@ import CoreData
 import UIKit
 
 @available(iOS 13.0, *)
-class LikeImageInteractor {
+final class LikeImageInteractor {
     
-    weak var output: LikeImageInteractorOutput!
+    weak var output: LikeImageInteractorOutput?
 }
 
 //MARK: LikeImageInteractorInput

@@ -9,7 +9,7 @@
 import CoreData
 
 @available(iOS 13.0, *)
-protocol LikeImageInteractorInput {
+protocol LikeImageInteractorInput: AnyObject {
     func deleteImage(image: ImageInfo)
     func getImage(with: NSFetchedResultsControllerDelegate) -> EmployeeProvider
 }

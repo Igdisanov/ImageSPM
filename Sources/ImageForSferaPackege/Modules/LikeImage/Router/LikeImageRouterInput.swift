@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol LikeImageRouterInput {
+protocol LikeImageRouterInput: AnyObject {
     func pushDetailVC(vc: UIViewController, image: ImageDataInfo)
 }

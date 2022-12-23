@@ -7,20 +7,33 @@
 
 import UIKit
 
-class DetailInfoConfigurator {
+final class DetailInfoContainer {
     
-   static func configure(image: ImageDataInfo, output: Any? = nil) -> DetailInfoViewController {
-       
-        let viewController = DetailInfoViewController()
+    let input: DetailInfoModuleInput
+    let viewController: UIViewController
+    private(set) weak var router: DetailInfoRouterInput?
+
+    static func assemble(with context: DetailInfoContext) -> DetailInfoContainer {
         let router = DetailInfoRouter()
         let interactor = DetailInfoInteractor()
-        let presenter = DetailInfoPresenter(interactor: interactor,
-                                            router: router,
-                                            output: output as? DetailInfoModuleOutput)
+        let presenter = DetailInfoPresenter(router: router, interactor: interactor)
+        let viewController = DetailInfoViewController(output: presenter)
+
         presenter.view = viewController
+        presenter.moduleOutput = context.moduleOutput
+
         interactor.output = presenter
-        viewController.output = presenter 
-        presenter.image = image
-        return viewController
+
+        return DetailInfoContainer(view: viewController, input: presenter, router: router)
     }
+
+    private init(view: UIViewController, input: DetailInfoModuleInput, router: DetailInfoRouterInput) {
+        self.viewController = view
+        self.input = input
+        self.router = router
+    }
+}
+
+struct DetailInfoContext {
+    weak var moduleOutput: DetailInfoModuleOutput?
 }

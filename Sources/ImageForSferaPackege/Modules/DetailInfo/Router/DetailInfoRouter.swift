@@ -5,8 +5,9 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
-class DetailInfoRouter: DetailInfoRouterInput {
-    
-    
+final class DetailInfoRouter {
+}
+
+extension DetailInfoRouter: DetailInfoRouterInput {
     
 }

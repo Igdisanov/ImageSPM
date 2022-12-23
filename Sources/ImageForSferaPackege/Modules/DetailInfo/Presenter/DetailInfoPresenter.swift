@@ -7,35 +7,39 @@
 
 
 
-class DetailInfoPresenter: DetailInfoInteractorOutput {
+final class DetailInfoPresenter {
     
-    weak var view: DetailInfoViewInput!
-    var interactor: DetailInfoInteractorInput!
-    var router: DetailInfoRouterInput!
-    var output: DetailInfoModuleOutput?
+    weak var view: DetailInfoViewInput?
+    weak var moduleOutput: DetailInfoModuleOutput?
+    
+    private let interactor: DetailInfoInteractorInput
+    private let router: DetailInfoRouterInput
+    
     
     var image: ImageDataInfo! {
         didSet{
-            view.setupInitialState(image: image)
+            view?.setupInitialState(image: image)
         }
     }
     
-    init( interactor: DetailInfoInteractorInput!, router: DetailInfoRouterInput!, output: DetailInfoModuleOutput? = nil) {
-        self.interactor = interactor
+    init(router: DetailInfoRouterInput, interactor: DetailInfoInteractorInput) {
         self.router = router
-        self.output = output
+        self.interactor = interactor
     }
 }
 
-     //MARK:DetailInfoViewOutput
+     //MARK: - DetailInfoViewOutput
 
 extension DetailInfoPresenter: DetailInfoViewOutput {
-    func viewDidLoad() {
-    }
 }
 
-     //MARK: DetailInfoModuleInput
+     //MARK: - DetailInfoModuleInput
 
 extension DetailInfoPresenter: DetailInfoModuleInput {
     
+}
+
+//MARK: - DetailInfoInteractorOutput
+
+extension DetailInfoPresenter: DetailInfoInteractorOutput {
 }

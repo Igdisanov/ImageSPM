@@ -7,13 +7,13 @@
 
 import Kingfisher
 
-class DetailInfoInteractor {
+final class DetailInfoInteractor {
     
-    weak var output: DetailInfoInteractorOutput!
+    weak var output: DetailInfoInteractorOutput?
     
 }
 
-     //MARK: DetailInfoInteractorInput
+     //MARK: - DetailInfoInteractorInput
 
 extension DetailInfoInteractor: DetailInfoInteractorInput {
     

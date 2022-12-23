@@ -10,19 +10,26 @@ import CoreData
 import Kingfisher
 
 @available(iOS 13.0, *)
-public class LikeImageViewController: UIViewController {
-    
-    // MARK: - Public Properties
-    
-    var output: LikeImageViewOutput!
+final class LikeImageViewController: UIViewController {
     
     // MARK: - Private Properties
     
+    private let output: LikeImageViewOutput
     private let imageTableView = UITableView()
     private var savedImages = [ImageInfo]()
     private var provider: EmployeeProvider?
     
     // MARK: - Initializers
+    
+    init(output: LikeImageViewOutput) {
+        self.output = output
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()

@@ -5,6 +5,6 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
-protocol DetailInfoInteractorInput {
+protocol DetailInfoInteractorInput: AnyObject {
     
 }

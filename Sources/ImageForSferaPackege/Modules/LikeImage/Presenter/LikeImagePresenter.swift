@@ -10,18 +10,19 @@ import CoreData
 import UIKit
 
 @available(iOS 13.0, *)
-class LikeImagePresenter: LikeImageInteractorOutput {
+final class LikeImagePresenter {
     
-    weak var view: LikeImageViewInput!
-    var interactor: LikeImageInteractorInput!
-    var router: LikeImageRouterInput!
-    var output: LikeImageModuleOutput?
+    weak var view: LikeImageViewInput?
+    weak var moduleOutput: LikeImageModuleOutput?
+    
+    private let router: LikeImageRouterInput
+    private let interactor: LikeImageInteractorInput
+    
     private var provider: EmployeeProvider?
     
-    init(interactor: LikeImageInteractorInput!, router: LikeImageRouterInput!, output: LikeImageModuleOutput? = nil) {
-        self.interactor = interactor
+    init(router: LikeImageRouterInput, interactor: LikeImageInteractorInput) {
         self.router = router
-        self.output = output
+        self.interactor = interactor
     }
 }
 
@@ -32,7 +33,7 @@ extension LikeImagePresenter: LikeImageViewOutput {
     
     func getImages(with: NSFetchedResultsControllerDelegate) {
         self.provider = interactor.getImage(with: with)
-        view.setupInitialState(provider: provider)
+        view?.setupInitialState(provider: provider)
     }
     
     func deleteImage(image: ImageInfo) {
@@ -52,5 +53,10 @@ extension LikeImagePresenter: LikeImageViewOutput {
 @available(iOS 13.0, *)
 extension LikeImagePresenter: LikeImageModuleInput {
     
+}
+
+//MARK: - LikeImageInteractorOutput
+
+extension LikeImagePresenter: LikeImageInteractorOutput {
 }
 

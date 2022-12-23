@@ -10,7 +10,9 @@ import UIKit
 class AllImageRouter: AllImageRouterInput {
     
     func pushDetailVC(vc: UIViewController, image: ImageDataInfo) {
-        let detailVC = DetailInfoConfigurator.configure(image: image)
-        vc.navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = DetailInfoContainer.assemble(with: DetailInfoContext.init())
+        vc.navigationController?.pushViewController(detailVC.viewController, animated: true)
     }
 }
+
+

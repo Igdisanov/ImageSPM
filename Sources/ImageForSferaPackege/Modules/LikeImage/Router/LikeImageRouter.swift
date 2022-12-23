@@ -9,11 +9,13 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class LikeImageRouter: LikeImageRouterInput {
+final class LikeImageRouter {
     
+}
+
+extension LikeImageRouter: LikeImageRouterInput {
     func pushDetailVC(vc: UIViewController, image: ImageDataInfo) {
-        let detailVC = DetailInfoConfigurator.configure(image: image)
-        vc.navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = DetailInfoContainer.assemble(with: DetailInfoContext.init())
+        vc.navigationController?.pushViewController(detailVC.viewController, animated: true)
     }
-    
 }
