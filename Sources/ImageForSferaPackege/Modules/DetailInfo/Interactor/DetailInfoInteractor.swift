@@ -9,6 +9,7 @@
 final class DetailInfoInteractor {
     
     weak var output: DetailInfoInteractorOutput?
+    
     private let context: DetailInfoContext?
     
     init(context: DetailInfoContext) {
@@ -16,13 +17,11 @@ final class DetailInfoInteractor {
     }
 }
 
-     //MARK: - DetailInfoInteractorInput
+//MARK: - DetailInfoInteractorInput
 
 extension DetailInfoInteractor: DetailInfoInteractorInput {
-    func getImage() {
+    func requestImage() {
         guard let image = self.context?.image else {return}
         output?.getImage(image: image)
     }
-    
-    
 }

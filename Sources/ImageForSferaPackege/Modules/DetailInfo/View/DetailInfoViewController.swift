@@ -40,12 +40,9 @@ final class DetailInfoViewController: UIViewController {
         return imageView
     }()
     
-    // MARK: - Public Properties
-    
-    private let output: DetailInfoViewOutput
-    
     // MARK: - Private Properties
     
+    private let output: DetailInfoViewOutput
     private var image: ImageDataInfo?
     private var isTapped = false
     private var frameUserImageView: CGRect!
@@ -65,13 +62,13 @@ final class DetailInfoViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        output.askImage()
-        setupUI(image: image)
+        output.requestImage()
+        setupUI()
     }
     
     // MARK: - Setup UI
     
-    private func setupUI(image: ImageDataInfo?) {
+    private func setupUI() {
         
         setupContentView()
         setupContentImageView()

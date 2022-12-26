@@ -21,16 +21,16 @@ final class DetailInfoPresenter {
     }
 }
 
-     //MARK: - DetailInfoViewOutput
+//MARK: - DetailInfoViewOutput
 
 extension DetailInfoPresenter: DetailInfoViewOutput {
-    func askImage() {
-        interactor.getImage()
+    func requestImage() {
+        interactor.requestImage()
     }
     
 }
 
-     //MARK: - DetailInfoModuleInput
+//MARK: - DetailInfoModuleInput
 
 extension DetailInfoPresenter: DetailInfoModuleInput {
     
@@ -42,5 +42,4 @@ extension DetailInfoPresenter: DetailInfoInteractorOutput {
     func getImage(image: ImageDataInfo) {
         view?.setupInitialState(image: image)
     }
-    
 }

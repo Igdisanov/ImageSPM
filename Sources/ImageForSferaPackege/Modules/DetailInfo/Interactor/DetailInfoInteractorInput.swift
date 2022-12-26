@@ -6,5 +6,5 @@
 //
 
 protocol DetailInfoInteractorInput: AnyObject {
-    func getImage()
+    func requestImage()
 }
