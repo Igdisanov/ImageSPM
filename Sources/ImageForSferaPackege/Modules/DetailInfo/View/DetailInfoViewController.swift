@@ -65,6 +65,7 @@ final class DetailInfoViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        output.askImage()
         setupUI(image: image)
     }
     

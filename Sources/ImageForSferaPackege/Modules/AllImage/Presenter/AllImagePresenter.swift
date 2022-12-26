@@ -8,27 +8,29 @@
 
 import UIKit
 
-class AllImagePresenter: AllImageInteractorOutput {
+final class AllImagePresenter: AllImageInteractorOutput {
     
     // MARK: - Public Properties
     
-    weak var view: AllImageViewInput!
-    var interactor: AllImageInteractorInput!
-    var router: AllImageRouterInput!
-    var output: AllImageModuleOutput?
+    weak var view: AllImageViewInput?
+    weak var moduleOutput: AllImageModuleOutput?
+    
+    // MARK: - Privaet Properties
+    
+    private let router: AllImageRouterInput
+    private let interactor: AllImageInteractorInput
     
     // MARK: - Private Properties
     
     private var images = [ImageDataInfo]() {
         didSet {
-            self.view.setupInitialState(images: images)
+            self.view?.setupInitialState(images: images)
         }
     }
     
-    init(interactor: AllImageInteractorInput!, router: AllImageRouterInput!, output: AllImageModuleOutput? = nil) {
-        self.interactor = interactor
+    init(router: AllImageRouterInput, interactor: AllImageInteractorInput) {
         self.router = router
-        self.output = output
+        self.interactor = interactor
     }
 }
 

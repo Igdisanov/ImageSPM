@@ -14,7 +14,8 @@ class TabBarRouter: TabBarRouterInput {
     
     func creatViewControllers() {
         
-        let allImageVC = setupVC(view: AllImageConfigurator.configure(output: nil),
+        let AllImageViewController = AllImageContainer.assemble(with: AllImageContext.init())
+        let allImageVC = setupVC(view: AllImageViewController.viewController,
                                  title: "All",
                                  image: "rectangle.3.group")
         

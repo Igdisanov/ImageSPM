@@ -10,12 +10,16 @@ import CoreData
 import UIKit
 
 
-class AllImageInteractor {
+final class AllImageInteractor {
     
     // MARK: - Public Properties
-    weak var output: AllImageInteractorOutput!
-    var networkDataFetcher: NetworkFetcherProtocol!
+    weak var output: AllImageInteractorOutput?
+    var networkDataFetcher: NetworkFetcherProtocol
     var savedPhotos: [ImageInfo] = []
+    
+    init(networkDataFetcher: NetworkFetcherProtocol) {
+        self.networkDataFetcher = networkDataFetcher
+    }
 }
 
 //MARK: - AllImageInteractorInput

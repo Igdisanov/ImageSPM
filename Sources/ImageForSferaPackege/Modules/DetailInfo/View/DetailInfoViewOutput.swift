@@ -6,4 +6,5 @@
 //
 
 protocol DetailInfoViewOutput: AnyObject {
+    func askImage()
 }

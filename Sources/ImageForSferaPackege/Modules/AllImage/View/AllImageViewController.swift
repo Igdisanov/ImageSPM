@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AllImageViewController: UIViewController {
+final class AllImageViewController: UIViewController {
     
     // MARK: - Visual Components
     
@@ -37,12 +37,9 @@ public class AllImageViewController: UIViewController {
                                action: #selector(actionBarButtonTapped))
     }()
     
-    // MARK: - Public Properties
-    
-    var output: AllImageViewOutput!
-    
     // MARK: - Private Properties
     
+    private let output: AllImageViewOutput
     private var timer: Timer?
     private var images = [ImageDataInfo]()
     private var selectedImeges = [ImageDataInfo]()
@@ -54,6 +51,16 @@ public class AllImageViewController: UIViewController {
     }
     
     // MARK: - Initializers
+    
+    init(output: AllImageViewOutput) {
+        self.output = output
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import CoreData
 
-protocol AllImageInteractorInput {
+protocol AllImageInteractorInput: AnyObject {
     func fetchImages(searchTerm: String?, completion: @escaping ([ImageDataInfo]?) -> ())
     func savePhotos(photos: [ImageDataInfo])
     func getPhotos()

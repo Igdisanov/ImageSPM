@@ -15,13 +15,6 @@ final class DetailInfoPresenter {
     private let interactor: DetailInfoInteractorInput
     private let router: DetailInfoRouterInput
     
-    
-    var image: ImageDataInfo! {
-        didSet{
-            view?.setupInitialState(image: image)
-        }
-    }
-    
     init(router: DetailInfoRouterInput, interactor: DetailInfoInteractorInput) {
         self.router = router
         self.interactor = interactor
@@ -31,6 +24,10 @@ final class DetailInfoPresenter {
      //MARK: - DetailInfoViewOutput
 
 extension DetailInfoPresenter: DetailInfoViewOutput {
+    func askImage() {
+        interactor.getImage()
+    }
+    
 }
 
      //MARK: - DetailInfoModuleInput
@@ -42,4 +39,8 @@ extension DetailInfoPresenter: DetailInfoModuleInput {
 //MARK: - DetailInfoInteractorOutput
 
 extension DetailInfoPresenter: DetailInfoInteractorOutput {
+    func getImage(image: ImageDataInfo) {
+        view?.setupInitialState(image: image)
+    }
+    
 }

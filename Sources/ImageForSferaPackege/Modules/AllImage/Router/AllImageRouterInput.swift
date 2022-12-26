@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol AllImageRouterInput {
+protocol AllImageRouterInput: AnyObject {
     func pushDetailVC(vc: UIViewController, image: ImageDataInfo)
 }
