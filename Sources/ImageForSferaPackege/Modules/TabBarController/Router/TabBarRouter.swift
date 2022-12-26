@@ -8,9 +8,12 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class TabBarRouter: TabBarRouterInput {
+final class TabBarRouter {
     
     weak var view: TabBarViewInput?
+}
+
+extension TabBarRouter: TabBarRouterInput {
     
     func creatViewControllers() {
         
@@ -34,5 +37,4 @@ class TabBarRouter: TabBarRouterInput {
         
         return vc
     }
-    
 }

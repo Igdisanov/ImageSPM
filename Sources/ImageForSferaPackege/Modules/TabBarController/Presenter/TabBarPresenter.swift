@@ -7,15 +7,15 @@
 
 class TabBarPresenter: TabBarInteractorOutput {
     
-    weak var view: TabBarViewInput!
-    var interactor: TabBarInteractorInput!
-    var router: TabBarRouterInput!
-    var output: TabBarModuleOutput?
+    weak var view: TabBarViewInput?
+    weak var moduleOutput: TabBarModuleOutput?
     
-    init(interactor: TabBarInteractorInput!, router: TabBarRouterInput!, output: TabBarModuleOutput? = nil) {
-        self.interactor = interactor
+    private let router: TabBarRouterInput
+    private let interactor: TabBarInteractorInput
+    
+    init(router: TabBarRouterInput, interactor: TabBarInteractorInput) {
         self.router = router
-        self.output = output
+        self.interactor = interactor
     }
     
 }

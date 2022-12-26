@@ -9,7 +9,17 @@ import UIKit
 
 public class TabBarController: UITabBarController {
     
-    var output: TabBarViewOutput!
+    private let output: TabBarViewOutput
+    
+    init(output: TabBarViewOutput) {
+        self.output = output
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
