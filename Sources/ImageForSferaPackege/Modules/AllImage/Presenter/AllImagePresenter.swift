@@ -34,7 +34,7 @@ final class AllImagePresenter: AllImageInteractorOutput {
     }
 }
 
-     //MARK: - AllImageViewOutput
+//MARK: - AllImageViewOutput
 
 extension AllImagePresenter: AllImageViewOutput {
     
@@ -58,7 +58,7 @@ extension AllImagePresenter: AllImageViewOutput {
     }
 }
 
-     //MARK: - AllImageModuleInput
+//MARK: - AllImageModuleInput
 
 extension AllImagePresenter: AllImageModuleInput {
     
