@@ -53,10 +53,6 @@ extension AllImagePresenter: AllImageViewOutput {
         interactor.savePhotos(photos: photos)
     }
     
-    func getPhotos() {
-        interactor.getPhotos()
-    }
-    
     func openDetailInfo(vc: UIViewController, image: ImageDataInfo){
         router.pushDetailVC(vc: vc, image: image)
     }

@@ -48,11 +48,6 @@ extension AllImageInteractor: AllImageInteractorInput {
             self.savePhoto(photo: photo)
         }
     }
-    
-    func getPhotos() {
-        self.getData()
-    }
-    
 }
 
 //MARK: - CoreData
@@ -86,16 +81,4 @@ extension AllImageInteractor {
             print(error.localizedDescription)
         }
     }
-    
-    private func getData() {
-        let context = getContext()
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        do {
-            savedPhotos = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    
-    
 }
