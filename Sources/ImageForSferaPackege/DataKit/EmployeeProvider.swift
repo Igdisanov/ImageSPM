@@ -9,7 +9,7 @@
 import CoreData
 
 @available(iOS 13.0, *)
-class EmployeeProvider {
+final class EmployeeProvider {
     private weak var fetchedResultControllerDelegate: NSFetchedResultsControllerDelegate?
     
     init(with fetchedResultControllerDelegate: NSFetchedResultsControllerDelegate) {

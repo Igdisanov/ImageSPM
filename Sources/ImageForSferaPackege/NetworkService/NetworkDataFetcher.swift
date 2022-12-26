@@ -13,7 +13,7 @@ protocol NetworkFetcherProtocol {
 
 final class NetworkDataFetcher: NetworkFetcherProtocol {
     
-    var netwokService: NetworkProtocol!
+    var netwokService: NetworkProtocol
     
     init(){
         self.netwokService = NetworkService()
