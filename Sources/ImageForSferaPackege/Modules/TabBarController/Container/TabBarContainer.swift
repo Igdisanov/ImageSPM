@@ -21,7 +21,6 @@ open class TabBarContainer {
         let viewController = TabBarController(output: presenter)
 
         presenter.view = viewController
-        router.view = viewController
         presenter.moduleOutput = context.moduleOutput
         interactor.output = presenter
 

@@ -23,7 +23,7 @@ public class TabBarController: UITabBarController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        output.viewDidLoad()
+        output.addViewControllers(view: self)
     }
 }
 

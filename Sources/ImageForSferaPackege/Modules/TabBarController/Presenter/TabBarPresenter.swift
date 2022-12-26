@@ -5,6 +5,8 @@
 //  Created by Vadim Igdisanov on 06.12.2022.
 //
 
+import UIKit
+
 class TabBarPresenter: TabBarInteractorOutput {
     
     weak var view: TabBarViewInput?
@@ -24,7 +26,10 @@ class TabBarPresenter: TabBarInteractorOutput {
 
 extension TabBarPresenter: TabBarViewOutput {
     func viewDidLoad() {
-        router.creatViewControllers()
+    }
+    
+    func addViewControllers(view: UITabBarController) {
+        router.creatViewControllers(view: view)
     }
 }
 

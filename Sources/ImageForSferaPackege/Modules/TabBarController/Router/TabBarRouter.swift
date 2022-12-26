@@ -9,13 +9,11 @@ import UIKit
 
 @available(iOS 13.0, *)
 final class TabBarRouter {
-    
-    weak var view: TabBarViewInput?
 }
 
 extension TabBarRouter: TabBarRouterInput {
     
-    func creatViewControllers() {
+    func creatViewControllers(view: UITabBarController) {
         
         let AllImageViewController = AllImageContainer.assemble(with: AllImageContext.init())
         let allImageVC = setupVC(view: AllImageViewController.viewController,
@@ -26,7 +24,7 @@ extension TabBarRouter: TabBarRouterInput {
         let likeImageVC = setupVC(view: likeImageViewController.viewController,
                                   title: "Like",
                                   image: "suit.heart")
-        view?.returnView().viewControllers = [allImageVC, likeImageVC]
+        view.viewControllers = [allImageVC, likeImageVC]
     }
     
     private func setupVC(view: UIViewController, title: String, image: String) -> UIViewController {
