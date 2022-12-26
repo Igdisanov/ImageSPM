@@ -16,7 +16,6 @@ final class LikeImageViewController: UIViewController {
     
     private let output: LikeImageViewOutput
     private let imageTableView = UITableView()
-    private var savedImages = [ImageInfo]()
     private var provider: EmployeeProvider?
     
     // MARK: - Initializers
